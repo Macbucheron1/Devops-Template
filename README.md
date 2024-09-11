@@ -36,7 +36,7 @@ Follow those step to install the project localy:
 
 3. Install dependencies :
 
-    - Avec **npm** :
+    - With **npm** :
 
       ```bash
       npm install
@@ -44,7 +44,7 @@ Follow those step to install the project localy:
 
 4. Start the application :
 
-    - Avec **npm** :
+    - With **npm** :
 
       ```bash
       npm start

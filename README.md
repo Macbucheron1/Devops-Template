@@ -1,6 +1,4 @@
-# Nom du Projet
-
-Une brève description du projet ici. Expliquez ce qu'il fait, les technologies utilisées, et à qui il s'adresse.
+# ECE Devops Lab
 
 ## Table des matières
 

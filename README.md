@@ -5,48 +5,38 @@ Une brève description du projet ici. Expliquez ce qu'il fait, les technologies 
 ## Table des matières
 
 - [Description](#description)
-- [Caractéristiques](#caracteristiques)
-- [Prérequis](#prerequis)
-- [Installation](#installation)
-- [Utilisation](#utilisation)
-- [Contribuer](#contribuer)
-- [Licence](#licence)
+- [Prerequisites](#prerequisites)
+- [Install](#install)
 
 ## Description
 
-Ce projet est un outil permettant de **simplifier le processus X**. Il a été conçu pour aider les développeurs à **résoudre Y problème**. Il est construit en utilisant **[Technologie 1]**, **[Technologie 2]**, et peut être utilisé pour des projets **A**, **B**, et **C**.
+This is the repository for the Devops course at ECE Paris
+Made by Nathan DEPRAT [@Macbucheron1](https://github.com/Macbucheron1)
 
-## Caractéristiques
+## Prerequisites
 
-- Fonctionnalité 1
-- Fonctionnalité 2
-- Fonctionnalité 3
+Before trying to install the project make sur to install those technologie:
 
-## Prérequis
+- **[npm]** (v8.5.1 +)
+- **[Node.js]** (v12.22.9 +)
 
-Avant d'installer le projet, assurez-vous d'avoir installé les éléments suivants :
+## Install
 
-- **[Nom de la technologie 1]** (par exemple, Python 3.8+)
-- **[Nom de la technologie 2]** (par exemple, Node.js)
-- **[Nom de la technologie 3]** (par exemple, Docker)
+Follow those step to install the project localy:
 
-## Installation
-
-Suivez ces étapes pour installer le projet localement :
-
-1. Clonez le dépôt :
+1. Clone the repository:
 
     ```bash
-    git clone https://github.com/utilisateur/nom-du-projet.git
+    git clone https://github.com/Macbucheron1/EceDevops_lab1.git
     ```
 
-2. Accédez au dossier du projet :
+2. Access the project file :
 
     ```bash
     cd nom-du-projet
     ```
 
-3. Installez les dépendances (selon la technologie utilisée) :
+3. Install dependencies :
 
     - Avec **npm** :
 
@@ -54,13 +44,7 @@ Suivez ces étapes pour installer le projet localement :
       npm install
       ```
 
-    - Avec **pip** (pour les projets Python) :
-
-      ```bash
-      pip install -r requirements.txt
-      ```
-
-4. Démarrez l'application (selon la technologie) :
+4. Start the application :
 
     - Avec **npm** :
 
@@ -68,15 +52,3 @@ Suivez ces étapes pour installer le projet localement :
       npm start
       ```
 
-    - Avec **Python** :
-
-      ```bash
-      python main.py
-      ```
-
-## Utilisation
-
-Décrivez ici comment utiliser le projet après l'installation. Donnez quelques exemples ou cas d'utilisation.
-
-```bash
-commande-pour-utiliser-le-projet

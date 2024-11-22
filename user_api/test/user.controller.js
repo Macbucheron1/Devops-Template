@@ -194,7 +194,7 @@ describe("User", () => {
      * Test case: Passing invalid user parameters (no username) for update.
      * Verifies that an error is returned and the result is null.
      */
-    it("passing wrong user parameters for update (no username", (done) => {
+    it("passing wrong user parameters for update (no username)", (done) => {
       const user = {
         username: "macbucheron",
         firstname: "Nathan",

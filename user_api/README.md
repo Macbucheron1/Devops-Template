@@ -147,7 +147,7 @@ It will output:
 
 ## API documentation
 
-We have create an Api documentation using swagger. You can access it by going to the following link: [API documentation](http://localhost:3000/api-docs/)
+We have create an Api documentation using [Swagger](https://swagger.io/). You can access it by going to the following link: [API documentation](http://localhost:3000/api-docs/)
 
 ## Testing
 
@@ -159,64 +159,4 @@ npm test
 
 it will run the test suite and output the result :
 
-```bash
-$ npm test
-
-> ece-userapi@1.1.0 test
-> ./node_modules/.bin/mocha test/*.js
-
-Server listening on port 3000
-
-
-  Configure
-    ✔ load default json configuration file
-    ✔ load custom configuration
-
-  Redis
-    ✔ should connect to Redis
-
-  User
-    Create
-      ✔ create a new user
-      ✔ passing wrong user parameters (no username)
-      ✔ passing wrong user parameters (no firstname)
-      ✔ passing wrong user parameters (no lastname)
-      ✔ avoid creating an existing user
-    Get
-      ✔ get a user by username
-      ✔ can not get a user when it does not exist
-      ✔ passing wrong username
-    Update
-      ✔ update an existing user
-      ✔ passing wrong user parameters for update (no username
-      ✔ passing wrong user parameters for update (no firstname)
-      ✔ passing wrong user parameters for update (no lastname)
-      ✔ can not update a user when it does not exist
-    Delete
-      ✔ deleting an existing user
-      ✔ can not delete a non existing user
-      ✔ passing no username for delete
-
-  User REST API
-    POST /user
-      ✔ create a new user
-      ✔ pass wrong parameters (no username)
-      ✔ pass wrong parameters (no firstname)
-      ✔ pass wrong parameters (no lastname)
-      ✔ can not create a user with an existing username
-    GET /user
-      ✔ get an existing user
-      ✔ can not get a user when it does not exist
-    PUT /user
-      ✔ update an existing user
-      ✔ pass wrong parameters (no username)
-      ✔ pass wrong parameters (no firstname)
-      ✔ pass wrong parameters (no lastname)
-      ✔ can not update a user when it does not exist
-    DELETE /user
-      ✔ delete an existing user
-      ✔ can not delete a user when it does not exist
-
-
-  33 passing (107ms)
-```
+![TestResult](../images/user_api/TestResult.png)

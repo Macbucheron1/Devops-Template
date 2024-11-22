@@ -7,6 +7,8 @@
 const express = require("express");
 const userRouter = require("./routes/user");
 const bodyParser = require("body-parser");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpecs = require("./swaggerConfig");
 
 const app = express();
 
@@ -59,6 +61,12 @@ app.get("/", (req, res) => res.send("Hello World!"));
  * Mounts the user router on the '/user' path.
  */
 app.use("/user", userRouter);
+
+/**
+ * Mounts the Swagger UI on the '/api-docs' path.
+ */
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+
 
 /**
  * Starts the server and listens on the specified port.

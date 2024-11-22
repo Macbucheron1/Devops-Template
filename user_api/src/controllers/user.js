@@ -17,6 +17,11 @@ module.exports = {
     // Validate that the username is provided
     if (!user.username)
       return callback(new Error("Username must be provided"), null);
+    // Validate that the first name and last name are provided
+    if (!user.firstname)
+      return callback(new Error("First name must be provided"), null);
+    if (!user.lastname)
+      return callback(new Error("Last name must be provided"), null);
 
     // Prepare the user object to be stored
     const userObj = {
@@ -70,6 +75,11 @@ module.exports = {
     // Validate that the username is provided
     if (!user.username)
       return callback(new Error("Username must be provided"), null);
+    // Validate that the first name and last name are provided
+    if (!user.firstname)
+      return callback(new Error("First name must be provided"), null);
+    if (!user.lastname)
+      return callback(new Error("Last name must be provided"), null);
 
     // Prepare the updated user object
     const userObj = {

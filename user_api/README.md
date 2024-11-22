@@ -6,7 +6,9 @@ It is a basic NodeJS web application exposing REST API that creates and stores u
 
 1. Start a web server
 2. Create a user
-2. Get a user
+3. Get a user
+4. Update a user
+5. Delete a user 
 
 ## Installation
 
@@ -43,7 +45,7 @@ Send a POST (REST protocol) request using terminal:
 ```bash
 curl --header "Content-Type: application/json" \
   --request POST \
-  --data '{"username":"sergkudinov","firstname":"sergei","lastname":"kudinov"}' \
+  --data '{"username":"macbucheron","firstname":"Nathan","lastname":"Deprat"}' \
   http://localhost:3000/user
 ```
 
@@ -53,7 +55,56 @@ It will output:
 {"status":"success","msg":"OK"}
 ```
 
-Another way to test your REST API is to use [Postman](https://www.postman.com/).
+3. Get a user 
+
+Send a GET (REST protocol) request using terminal
+
+```bash
+curl --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:3000/user/macbucheron
+```
+
+It will output:
+
+```
+{"status":"success","msg":{"firstname":"Nathan","lastname":"Deprat"}}                              
+```
+
+
+4. Update a user 
+
+Send a PUT (REST protocol) request using terminal
+
+```bash
+curl --header "Content-Type: application/json" \
+  --request PUT \
+  --data '{"username": "macbucheron", "firstname":"Ibrahim", "lastname":"Diallo"}' \
+  http://localhost:3000/user/update
+```
+
+It will output:
+
+```
+{"status":"success","msg":"OK"}                           
+```
+
+5. Delete a user
+
+Send a Delete (REST protocol) request using terminal
+
+```bash
+curl --header "Content-Type: application/json" \
+  --request DELETE \
+  http://localhost:3000/user/macbucheron
+```
+
+It will output:
+
+```
+{"status":"success","msg":1}%                          
+```
+
 
 ## Testing
 
@@ -62,3 +113,10 @@ From the root directory of the project, run:
 ```
 npm test
 ```
+
+## To do list 
+
+- [ ] complete readme
+- [ ] Doc all the file
+- [ ] Transform all the .js in .ts (make sur  that all variable have a type)
+- [ ] add postman way to test 

@@ -1,20 +1,47 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
+name: Node.js CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
-  build-node:
+  build:
+    name: Run tests
     runs-on: ubuntu-latest
-    container: node:18
+    env:
+      working-directory: ./user_api
+      NODE_VERSION: "18.18.0"
+
+    defaults:
+      run:
+        working-directory: ${{ env.working-directory }}
+
     steps:
-      - run: node --version
-      - run: npm --version
       - uses: actions/checkout@v3
-      - run: npm install
-      - run: npm start
-    
+
+      - uses: shogo82148/actions-setup-redis@v1
+        with:
+          redis-version: "6.x"
+
+      - name: Redis test
+        run: redis-cli ping
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Installing Node dependencies
+        run: npm install
+
+      - name: Running tests
+        run: npm test
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-app
+          path: ${{ env.working-directory }}

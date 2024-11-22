@@ -57,9 +57,9 @@ describe("User REST API", () => {
 
     /**
      * Test case: Pass invalid parameters for user creation.
-     * Sends a POST request with missing fields and verifies the error response.
+     * Sends a POST request with missing username and verifies the error response.
      */
-    it("pass wrong parameters", (done) => {
+    it("pass wrong parameters (no username)", (done) => {
       const user = {
         firstname: "Nathan",
         lastname: "Deprat",
@@ -77,6 +77,83 @@ describe("User REST API", () => {
         .catch((err) => {
           throw err;
         });
+    });
+
+    /**
+     * Test case: Pass invalid parameters for user creation.
+     * Sends a POST request with missing firstname and verifies the error response.
+     */
+    it("pass wrong parameters (no firstname)", (done) => {
+      const user = {
+        username: "Macbucheron",
+        lastname: "Deprat",
+      };
+      chai
+        .request(app)
+        .post("/user")
+        .send(user)
+        .then((res) => {
+          chai.expect(res).to.have.status(400);
+          chai.expect(res.body.status).to.equal("error");
+          chai.expect(res).to.be.json;
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    /**
+     * Test case: Pass invalid parameters for user creation.
+     * Sends a POST request with missing lastname and verifies the error response.
+     */
+    it("pass wrong parameters (no lastname)", (done) => {
+      const user = {
+        username: "Macbucheron",
+        firstname: "Nathan",
+      };
+      chai
+        .request(app)
+        .post("/user")
+        .send(user)
+        .then((res) => {
+          chai.expect(res).to.have.status(400);
+          chai.expect(res.body.status).to.equal("error");
+          chai.expect(res).to.be.json;
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    /**
+     * Test case: Attempt to create a user with an existing username.
+     * Sends a POST request with an existing username and verifies the error response.
+     */
+    it("can not create a user with an existing username", (done) => {
+      const user = {
+        username: "Macbucheron",
+        firstname: "Nathan",
+        lastname: "Deprat",
+      };
+      // Create a user
+      userController.create(user, () => {
+        // Attempt to create the same user
+        chai
+          .request(app)
+          .post("/user")
+          .send(user)
+          .then((res) => {
+            chai.expect(res).to.have.status(400);
+            chai.expect(res.body.status).to.equal("error");
+            chai.expect(res).to.be.json;
+            done();
+          })
+          .catch((err) => {
+            throw err;
+          });
+      });
     });
   });
 
@@ -161,6 +238,75 @@ describe("User REST API", () => {
             throw err;
           });
       });
+    });
+
+    /**
+     * Test case: Pass invalid parameters for user update.
+     * Sends a PUT request with missing username and verifies the error response.
+     */
+    it("pass wrong parameters (no username)", (done) => {
+      chai
+        .request(app)
+        .put("/user/update")
+        .send({
+          firstname: "Ibrahim",
+          lastname: "Diallo",
+        })
+        .then((res) => {
+          chai.expect(res).to.have.status(400);
+          chai.expect(res.body.status).to.equal("error");
+          chai.expect(res).to.be.json;
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    /**
+     * Test case: Pass invalid parameters for user update.
+     * Sends a PUT request with missing firstname and verifies the error response.
+     */
+    it("pass wrong parameters (no firstname)", (done) => {
+      chai
+        .request(app)
+        .put("/user/update")
+        .send({
+          username: "Macbucheron",
+          lastname: "Diallo",
+        })
+        .then((res) => {
+          chai.expect(res).to.have.status(400);
+          chai.expect(res.body.status).to.equal("error");
+          chai.expect(res).to.be.json;
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    /**
+     * Test case: Pass invalid parameters for user update.
+     * Sends a PUT request with missing lastname and verifies the error response.
+     */
+    it("pass wrong parameters (no lastname)", (done) => {
+      chai
+        .request(app)
+        .put("/user/update")
+        .send({
+          username: "Macbucheron",
+          firstname: "Ibrahim",
+        })
+        .then((res) => {
+          chai.expect(res).to.have.status(400);
+          chai.expect(res.body.status).to.equal("error");
+          chai.expect(res).to.be.json;
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
     });
 
     /**

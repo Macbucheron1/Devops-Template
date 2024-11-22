@@ -36,7 +36,7 @@ const userRouter = express.Router();
  *                 description: The last name of the new user.
  *                 example: Deprat
  *     responses:
- *       200:
+ *       201:
  *         description: User created successfully
  *       400:
  *         description: Bad request
@@ -49,7 +49,7 @@ userRouter.post("/", (req, resp) => {
       return resp.status(400).json(respObj);
     }
     respObj = { status: "success", msg: res };
-    resp.status(200).json(respObj);
+    resp.status(201).json(respObj);
   });
 });
 

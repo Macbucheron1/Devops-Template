@@ -35,10 +35,10 @@ describe("User", () => {
     });
 
     /**
-     * Test case: Passing invalid user parameters for creation.
+     * Test case: Passing invalid user parameters (no username) for creation.
      * Verifies that an error is returned and the result is null.
      */
-    it("passing wrong user parameters", (done) => {
+    it("passing wrong user parameters (no username)", (done) => {
       const user = {
         firstname: "Nathan",
         lastname: "Deprat",
@@ -49,6 +49,39 @@ describe("User", () => {
         done();
       });
     });
+
+    /**
+     * Test case: Passing invalid user parameters (no firstname) for creation.
+     * Verifies that an error is returned and the result is null.
+     */ 
+    it("passing wrong user parameters (no firstname)", (done) => {
+      const user = {
+        username: "macbucheron",
+        lastname: "Deprat",
+      };
+      userController.create(user, (err, result) => {
+        expect(err).to.not.be.equal(null);
+        expect(result).to.be.equal(null);
+        done();
+      });
+    });
+
+    /**
+     * Test case: Passing invalid user parameters (no lastname) for creation.
+     * Verifies that an error is returned and the result is null.
+     */
+    it("passing wrong user parameters (no lastname)", (done) => {
+      const user = {
+        username: "macbucheron",
+        firstname: "Nathan",
+      };
+      userController.create(user, (err, result) => {
+        expect(err).to.not.be.equal(null);
+        expect(result).to.be.equal(null);
+        done();
+      });
+    });
+
 
     /**
      * Test case: Avoid creating a user that already exists.
@@ -158,10 +191,10 @@ describe("User", () => {
     });
 
     /**
-     * Test case: Passing invalid user parameters for update.
+     * Test case: Passing invalid user parameters (no username) for update.
      * Verifies that an error is returned and the result is null.
      */
-    it("passing wrong user parameters for update", (done) => {
+    it("passing wrong user parameters for update (no username", (done) => {
       const user = {
         username: "macbucheron",
         firstname: "Nathan",
@@ -174,6 +207,56 @@ describe("User", () => {
       // Create a user
       userController.create(user, () => {
         // Attempt to update with missing username
+        userController.update(updatedUser, (err, result) => {
+          expect(err).to.not.be.equal(null);
+          expect(result).to.be.equal(null);
+          done();
+        });
+      });
+    });
+
+    /**
+     * Test case: Passing invalid user parameters (no firstname) for update.
+     * Verifies that an error is returned and the result is null.
+     */
+    it("passing wrong user parameters for update (no firstname)", (done) => {
+      const user = {
+        username: "macbucheron",
+        firstname: "Nathan",
+        lastname: "Deprat",
+      };
+      const updatedUser = {
+        username: "macbucheron",
+        lastname: "Diallo",
+      };
+      // Create a user
+      userController.create(user, () => {
+        // Attempt to update with missing firstname
+        userController.update(updatedUser, (err, result) => {
+          expect(err).to.not.be.equal(null);
+          expect(result).to.be.equal(null);
+          done();
+        });
+      });
+    });
+
+    /**
+     * Test case: Passing invalid user parameters (no lastname) for update.
+     * Verifies that an error is returned and the result is null.
+     */
+    it("passing wrong user parameters for update (no lastname)", (done) => {
+      const user = {
+        username: "macbucheron",
+        firstname: "Nathan",
+        lastname: "Deprat",
+      };
+      const updatedUser = {
+        username: "macbucheron",
+        firstname: "Ibrahim",
+      };
+      // Create a user
+      userController.create(user, () => {
+        // Attempt to update with missing lastname
         userController.update(updatedUser, (err, result) => {
           expect(err).to.not.be.equal(null);
           expect(result).to.be.equal(null);

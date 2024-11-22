@@ -8,15 +8,12 @@
 
 ## Description
 
-This is the repository for the Devops course at ECE Paris
-Made by Nathan DEPRAT [@Macbucheron1](https://github.com/Macbucheron1)
+This is the repository for the Devops project at ECE Paris
+Made by :
+Nathan DEPRAT [@Macbucheron1](https://github.com/Macbucheron1)
+Ibrahim Diallo [@Xeroxx75](https://github.com/Xeroxx75)
 
-## Prerequisites
 
-Before trying to install the project make sur to install those technologie:
-
-- **[npm]** (v8.5.1 +)
-- **[Node.js]** (v12.22.9 +)
 
 ## Install
 
@@ -42,11 +39,15 @@ Follow those step to install the project localy:
       npm install
       ```
 
-4. Start the application :
+If you correctly followed all of the step you are now ready to use the project.
 
-    - With **npm** :
+## Usage
 
-      ```bash
-      npm start
-      ```
+To start the project you can use the following command:
 
+```bash
+npm start
+```
+
+It will start a web server available in your browser at http://localhost:3000.
+To get an complete list of the possibility of the project you can check the [API documentation](./user_api/README.md)

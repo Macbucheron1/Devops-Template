@@ -6,9 +6,11 @@
 
 const express = require("express");
 const userRouter = require("./routes/user");
+const healthRouter = require("./routes/health");
 const bodyParser = require("body-parser");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpecs = require("./swaggerConfig");
+const path = require("path");
 
 const app = express();
 
@@ -55,18 +57,24 @@ app.use(bodyParser.json());
  * @param {Request} req - Express request object.
  * @param {Response} res - Express response object.
  */
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "/index.html")));
 
 /**
  * Mounts the user router on the '/user' path.
+ * This router is used to handle user-related requests.
  */
 app.use("/user", userRouter);
+
+/**
+ * Mounts the health router on the '/health' path.
+ * This router is used to check the health of the application.
+ */
+app.use("/health", healthRouter);
 
 /**
  * Mounts the Swagger UI on the '/api-docs' path.
  */
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
-
 
 /**
  * Starts the server and listens on the specified port.

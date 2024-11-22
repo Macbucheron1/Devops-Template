@@ -1,6 +1,6 @@
 # User API web application
 
-It is a basic NodeJS web application exposing REST API that creates and stores user parameters in [Redis database](https://redis.io/).
+It is a basic [NodeJS](https://nodejs.org/en) web application exposing REST API that creates and stores user parameters in [Redis database](https://redis.io/).
 
 ## Functionality
 
@@ -15,7 +15,7 @@ It is a basic NodeJS web application exposing REST API that creates and stores u
 Before trying to install the project make sur to install those technologie:
 
 - **[Node.js](https://nodejs.org/en/download/package-manager)** (v18.19.1 +)
-- **[Redis]** (v7.4.1 +)
+- **[Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/)** (v7.4.1 +)
 
 ## Installation
 
@@ -35,7 +35,7 @@ Follow those step to install the project localy:
 
 3. Install dependencies :
 
-   - With **npm** :
+   - With _**npm**_ :
 
      ```bash
      npm install
@@ -44,42 +44,45 @@ Follow those step to install the project localy:
 ## Usage
 
 > [!IMPORTANT]
-> Make sur that Redis is running before starting the project. To make sure Redis is running use the command `redis-cli PING` and Redis should answer with `PONG`. If not, start Redis with the command `redis-server`.
+> Make sur that **Redis** is running before starting the project. To make sure Redis is running use the command `redis-cli PING` and Redis should answer with `PONG`. If not, start Redis with the command `redis-server`.
 
-```bash
+Make sur you are in the `user_api` directory before running the following command.
 
-1. Start a web server
+**1. Start a web server**
 
 From the root directory of the project run:
 
-```
-
+```bash
 npm start
-
-````
+```
+![ApiStart](../images/user_api/ApiStart.png)
 
 It will start a web server available in your browser at http://localhost:3000.
 
-2. Create a user
+![WebPage](../images/user_api/WebPage.png)
 
-Send a POST (REST protocol) request using terminal:
+
+
+**2. Create a user**
+
+Send a _POST_ (REST protocol) request using terminal:
 
 ```bash
 curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"username":"macbucheron","firstname":"Nathan","lastname":"Deprat"}' \
   http://localhost:3000/user
-````
+```
 
 It will output:
 
-```
-{"status":"success","msg":"OK"}
+```json
+{ "status": "success", "msg": "OK" }
 ```
 
-3. Get a user
+**3. Get a user**
 
-Send a GET (REST protocol) request using terminal
+Send a _GET_ (REST protocol) request using terminal
 
 ```bash
 curl --header "Content-Type: application/json" \
@@ -89,13 +92,13 @@ curl --header "Content-Type: application/json" \
 
 It will output:
 
-```
-{"status":"success","msg":{"firstname":"Nathan","lastname":"Deprat"}}
+```json
+{ "status": "success", "msg": { "firstname": "Nathan", "lastname": "Deprat" } }
 ```
 
-4. Update a user
+**4. Update a user**
 
-Send a PUT (REST protocol) request using terminal
+Send a _PUT_ (REST protocol) request using terminal
 
 ```bash
 curl --header "Content-Type: application/json" \
@@ -106,13 +109,13 @@ curl --header "Content-Type: application/json" \
 
 It will output:
 
-```
-{"status":"success","msg":"OK"}
+```json
+{ "status": "success", "msg": "OK" }
 ```
 
-5. Delete a user
+**5. Delete a user**
 
-Send a Delete (REST protocol) request using terminal
+Send a _DELETE_ (REST protocol) request using terminal
 
 ```bash
 curl --header "Content-Type: application/json" \
@@ -122,21 +125,41 @@ curl --header "Content-Type: application/json" \
 
 It will output:
 
+```json
+{ "status": "success", "msg": "Number of rows deleted: 1" }
 ```
-{"status":"success","msg":1}%
+
+**6. Health check**
+
+Send a _GET_ (REST protocol) request using terminal
+
+```bash
+curl --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:3000/health
 ```
+
+It will output:
+
+```json
+{ "uptime": 103.347303221, "status": "OK", "timestamp": 1732315440692 }
+```
+
+## API documentation
+
+We have create an Api documentation using swagger. You can access it by going to the following link: [API documentation](http://localhost:3000/api-docs/)
 
 ## Testing
 
 From the root directory of the project, run:
 
-```
+```bash
 npm test
 ```
 
 it will run the test suite and output the result :
 
-```
+```bash
 $ npm test
 
 > ece-userapi@1.1.0 test
@@ -197,10 +220,3 @@ Server listening on port 3000
 
   33 passing (107ms)
 ```
-
-## To do list
-
-- [ ] complete readme
-- [ ] Doc all the file
-- [ ] Transform all the .js in .ts (make sur that all variable have a type)
-- [ ] add postman way to test

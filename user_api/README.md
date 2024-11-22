@@ -163,3 +163,4 @@ it will run the test suite and output the result :
 
 ## [Back to main README](../README.md#1-create-a-web-application)
 
+Let's go back to the main README to continue the project's walkthrough.

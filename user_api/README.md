@@ -160,3 +160,6 @@ npm test
 it will run the test suite and output the result :
 
 ![TestResult](../images/user_api/TestResult.png)
+
+## [Back to main README](../README.md)
+

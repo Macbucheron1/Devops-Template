@@ -147,7 +147,7 @@ It will output:
 
 ## API documentation
 
-We have create an Api documentation using [Swagger](https://swagger.io/). You can access it by going to the following link: [API documentation](http://localhost:3000/api-docs/)
+We have created an Api documentation using [Swagger](https://swagger.io/). You can access it by going to the following link: [API documentation](http://localhost:3000/api-docs/)
 
 ## Testing
 

@@ -161,5 +161,5 @@ it will run the test suite and output the result :
 
 ![TestResult](../images/user_api/TestResult.png)
 
-## [Back to main README](../README.md)
+## [Back to main README](../README.md#1-create-a-web-application)
 

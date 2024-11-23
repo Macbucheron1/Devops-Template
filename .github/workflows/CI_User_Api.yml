@@ -6,63 +6,60 @@ on:
 
 jobs:
   build:
-    strategy: # Define the matrix for the job
-      matrix: # We will get 2 jobs : 2 OS * 1 Node.js version * 1 Redis version
-        os: [ubuntu-latest, macos-latest, windows-latest] # All the OS to run the job
-        node_version: ["18.19.1"] # all the Node.js version
-        redis_version: ["6.x"] # all the Redis version
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node_version: ["18.19.1"]
+        redis_version: ["6.x"]
 
-    name: User API on ${{matrix.os}} using NodeJS ${{matrix.node_version}} and Redis ${{matrix.redis_version}} # name of the job
+    name: User API on ${{ matrix.os }} using NodeJS ${{ matrix.node_version }} and Redis ${{ matrix.redis_version }}
     runs-on: ${{ matrix.os }}
     env:
-      working-directory: ./user_api #set the working directory
+      working-directory: ./user_api
 
     defaults:
       run:
-        working-directory: ${{env.working-directory}} #set the default working directory
+        working-directory: ${{ env.working-directory }}
 
     steps:
-      #checkout the code
       - name: Checkout the code
         uses: actions/checkout@v4
 
-      #setup redis
-      - name: Setup Redis ${{ matrix.redis_version }}
+      - name: Setup Redis on non-Windows platforms
         if: runner.os != 'Windows'
         uses: shogo82148/actions-setup-redis@v1
         with:
           redis-version: ${{ matrix.redis_version }}
 
-      #setup redis on windows
       - name: Setup Redis on Windows
         if: runner.os == 'Windows'
         run: |
-          wsl --install
-          wsl apt-get update
-          wsl curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
-          wsl echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list
-          wsl apt-get update
-          wsl apt-get install redis
-          wsl service redis-server start
+          # Install WSL2 and Ubuntu
+          wsl --install -d Ubuntu || echo "WSL2 already installed"
+          # Start Redis server in Ubuntu
+          wsl sudo apt-get update
+          wsl sudo apt-get install -y redis
+          wsl sudo service redis-server start
 
-      #check if redis is running
       - name: Check if Redis is running
-        run: redis-cli ping
+        run: |
+          if [ "${{ matrix.os }}" == "windows-latest" ]; then
+            wsl redis-cli ping
+          else
+            redis-cli ping
+          fi
 
-      #setup node.js
       - name: Setup Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v4
         with:
-          cache-dependency-path: ${{env.working-directory}}
+          cache-dependency-path: ${{ env.working-directory }}
           node-version: ${{ matrix.node_version }}
           cache: "npm"
 
-      #install project dependencies
       - name: Install Node dependencies
         run: npm install
-        working-directory: ${{env.working-directory}}
+        working-directory: ${{ env.working-directory }}
 
-      #run test script to check if the build in working
       - name: Running the User API tests
         run: npm test
-        working-directory: ${{env.working-directory}}
+        working-directory: ${{ env.working-directory }}

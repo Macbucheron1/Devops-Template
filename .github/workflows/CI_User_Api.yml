@@ -6,12 +6,13 @@ on:
 
 jobs:
   build:
-    name: Test for User API and Redis functionnement # name of the job
     strategy: # Define the matrix for the job
       matrix: # We will get 2 jobs : 2 OS * 1 Node.js version * 1 Redis version
         os: [ubuntu-latest, macos-latest, windows-latest]  # All the OS to run the job
         node_version: ["18.19.1"]  # all the Node.js version
         redis_version: ["6.x"]  # all the Redis version
+
+    name: User API on ${{matrix.os}} using NodeJS ${{matrix.node_version}} and Redis ${{matrix.redis_version}} # name of the job
     runs-on: ${{ matrix.os }} 
     env:
       working-directory: ./user_api #set the working directory

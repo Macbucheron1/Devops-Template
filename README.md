@@ -74,6 +74,12 @@ Here is the result of a successful run:
 
 ![CI_UserApi](./images/CI_CD/CI_UserApi.png)
 
+One of the feature of Github Actions is that it can run on multiple OS. Here is the result of a run on Windows:
+
+![CI_UserApi_Windows](./images/CI_CD/FailedWindowsCI.png)
+
+The third job is failing because the Redis server is not running. This is because the Redis server is not available on Windows.
+
 
 ## 3. Configuring and provisioning a virtual environment and run our application using the IaC approach
 

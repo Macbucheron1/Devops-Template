@@ -34,8 +34,13 @@ jobs:
       - name: Setup Redis on Windows
         if: runner.os == 'Windows'
         run: |
-          # Install WSL2 and Ubuntu
-          wsl --install -d Ubuntu || echo "WSL2 already installed"
+          # Check if WSL2 is installed
+          if wsl --list --quiet | findstr /r "^Ubuntu$"; then
+            echo "Ubuntu is already installed"
+          else
+            # Install WSL2 and Ubuntu
+            wsl --install -d Ubuntu
+          fi
           # Start Redis server in Ubuntu
           wsl sudo apt-get update
           wsl sudo apt-get install -y redis

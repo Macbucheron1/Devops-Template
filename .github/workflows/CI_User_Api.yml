@@ -9,7 +9,7 @@ jobs:
     name: Test for User API and Redis functionnement # name of the job
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest]
         node_version: ["18.19.1"]
         redis_version: ["6.x"]
     runs-on: ${{ matrix.os }}

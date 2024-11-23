@@ -89,6 +89,19 @@ Now here is the result of successful jobs on Linux and MacOS:
 
 ![UbuntuMacOSResult](./images/CI_CD/UbuntuMacOsCIResult.png)
 
+_**Why did we install Redis instead of using a container?**_
+
+We have chosen to install Redis in order to make it work on Linux AND MacOS. Indeed, [Docker container are not available on MacOS](https://docs.github.com/en/actions/sharing-automations/creating-actions/about-custom-actions#types-of-actions). Therefore, we have to install Redis on the host machine in order to make it work on MacOS.
+
+_**Why did we uploads the user_api directory as an artifact instead of zipping all file in the repository and upload it as the deployment artifact ?** (As it was done in the [lab correction](https://github.com/adaltas/ece-devops-2024-fall/blob/main/modules/05.ci-cd/lab-corrections/master_user-api.yml))_
+
+This choice was made from multiple reasons:
+
+   1. By uploading the `user_api` directory, we are only uploading the necessary files for the User API. This is more efficient than uploading the whole repository.
+   2. Using `user_api` allows the artifact to be easily consummed in Docker-based and non-Docker-based deployment scenarios.
+
+In the lab correction, zipping the entire repository might have been simpler for a single deployment job focused on Azure Web App. However, in our case, the multi-job nature of the pipeline and the future integration of Docker-based deployment made the `user_api` directory a better choice.
+
 ### CD
 
 ## 3. Configuring and provisioning a virtual environment and run our application using the IaC approach

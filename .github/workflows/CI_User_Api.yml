@@ -10,7 +10,7 @@ jobs:
   build:
     strategy: # Define the matrix for the job
       matrix: # We will get 2 jobs : 2 OS * 1 Node.js version * 1 Redis version
-        os: [ubuntu-latest, macos-latest]  # All the OS to run the job
+        os: [ubuntu-latest]  # All the OS to run the job
         node_version: [18.x, 20.x, 22.x]  # all the Node.js version
         redis_version: ["6.x"]  # all the Redis version
 

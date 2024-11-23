@@ -59,6 +59,18 @@ Find all of the information in the [User API folder](./user_api/README.md). A li
 
 ## 2. Apply CI/CD pipeline
 
+### CI
+
+The first CI pipeline we have made is using Github Actions. It is triggered on every push on the main branch. It run the following steps:
+
+1. Check the code
+2. Setup Redis
+3. Check if Redis is running
+4. Setup Node.js
+5. Install dependencies
+6. Run the tests for the User API
+
+
 ## 3. Configuring and provisioning a virtual environment and run our application using the IaC approach
 
 ## 4. Building Docker image of our application

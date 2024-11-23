@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Run tests # name of the job
+    name: Test for User API and Redis functionnement # name of the job
     runs-on: ubuntu-latest # operating system to run the job on
     env:
       working-directory: ./user_api #set the working directory
@@ -19,19 +19,21 @@ jobs:
 
     steps:
       #checkout the code
-      - uses: actions/checkout@v4
+      - name: Checkout the code
+        uses: actions/checkout@v4
 
       #setup redis
-      - uses: shogo82148/actions-setup-redis@v1
+      - name: Setup Redis ${{ env.REDIS_VERSION }}
+        uses: shogo82148/actions-setup-redis@v1
         with:
           redis-version: ${{ env.REDIS_VERSION }}
 
       #check if redis is running
-      - name: Redis test
+      - name: Check if Redis is running 
         run: redis-cli ping
 
       #setup node.js
-      - name: Use Node.js ${{ env.NODE_VERSION }}
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v4
         with:
           cache-dependency-path: ${{env.working-directory}}
@@ -39,12 +41,12 @@ jobs:
           cache: "npm"
 
       #install project dependencies
-      - name: Installing Node dependencies
+      - name: Install Node dependencies
         run: npm install
         working-directory: ${{env.working-directory}}
 
       #run test script to check if the build in working
-      - name: Running tests
+      - name: Running the User API tests
         run: npm test
         working-directory: ${{env.working-directory}}
 

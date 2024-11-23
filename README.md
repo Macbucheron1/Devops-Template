@@ -70,6 +70,10 @@ The first CI pipeline we have made is using Github Actions. It is triggered on e
 5. Install dependencies
 6. Run the tests for the User API
 
+Here is the result of a successful run:
+
+![CI_UserApi](./images/CI_CD/CI_UserApi.png)
+
 
 ## 3. Configuring and provisioning a virtual environment and run our application using the IaC approach
 

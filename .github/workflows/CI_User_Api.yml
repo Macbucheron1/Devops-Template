@@ -7,7 +7,10 @@ on:
 jobs:
   build:
     name: Test for User API and Redis functionnement # name of the job
-    runs-on: ubuntu-latest # operating system to run the job on
+    runs-on: ${( matrix.os )} # operating system to run the job on
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest] # operating system to run the job on
     env:
       working-directory: ./user_api #set the working directory
       NODE_VERSION: "18.19.1" #node version to use

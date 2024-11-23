@@ -29,7 +29,7 @@ const healthRouter = express.Router();
  *       503:
  *         description: App unhealthy
  */
-healthRouter.get("/", async (req, res, next) => {
+healthRouter.get("/", async (res) => {
   const healthcheck = {
     uptime: process.uptime(),
     status: "OK",

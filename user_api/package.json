@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "test": "./node_modules/.bin/mocha test/*.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "lint": "eslint ."
   },
   "author": "Nathan Deprat",
   "license": "",

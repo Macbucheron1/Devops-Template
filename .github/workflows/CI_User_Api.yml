@@ -49,6 +49,10 @@ jobs:
         run: npm install
         working-directory: ${{env.working-directory}}
 
+      - name: Run Linter
+        run: npm run lint
+        working-directory: ${{env.working-directory}}
+
       #run test script to check if the build in working
       - name: Running the User API tests
         run: npm test

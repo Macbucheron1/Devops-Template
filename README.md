@@ -73,12 +73,20 @@ Here is the result of a successful run:
 
 ![CI_UserApi](./images/CI_CD/CI_UserApi.png)
 
-One of the feature of Github Actions is that it can run on multiple OS. Here is the result of a run on Windows:
+One of the feature of Github Actions is that it can run on multiple OS. Here is the result of 3 different OS:
 
 ![CI_UserApi_Windows](./images/CI_CD/FailedWindowsCI.png)
 
 The third job is failing because the Redis server is not available on Windows.
 The second one as being stopped because of the error in the third job to economize resources.
+
+We have to remove the Windows job to have a successful run on all OS. Therefore our final CI pipeline is only running on MacOS and Linux.
+
+Now here is the result of successful jobs on Linux and MacOS:
+
+![UbuntuMacOSResult](./images/CI_CD/UbuntuMacOsCIResult.png)
+
+### CD
 
 ## 3. Configuring and provisioning a virtual environment and run our application using the IaC approach
 

@@ -73,7 +73,7 @@ userRouter.post("/", (req, resp) => {
  *       400:
  *         description: Bad request
  */
-userRouter.get("/:username", (req, resp, next) => {
+userRouter.get("/:username", (req, resp) => {
   const username = req.params.username;
   userController.get(username, (err, res) => {
     let respObj;
@@ -106,7 +106,7 @@ userRouter.get("/:username", (req, resp, next) => {
  *       400:
  *         description: Bad request
  */
-userRouter.delete("/:username", (req, resp, next) => {
+userRouter.delete("/:username", (req, resp) => {
   const username = req.params.username;
   userController.delete(username, (err, res) => {
     let respObj;

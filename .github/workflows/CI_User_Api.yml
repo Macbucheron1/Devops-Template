@@ -28,9 +28,24 @@ jobs:
 
       #setup redis
       - name: Setup Redis ${{ matrix.redis_version }}
+        if: runner.os != 'Windows'
         uses: shogo82148/actions-setup-redis@v1
         with:
           redis-version: ${{ matrix.redis_version }}
+
+      #setup redis on windows
+      - name: Setup Redis on Windows
+        if: runner.os == 'Windows'
+        run: |
+          wsl --install
+          wsl sudo apt-get update
+          wsl curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+          wsl echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+          wsl sudo apt-get update
+          wsl sudo apt-get install redis
+          wsl sudo service redis-server start
+        
+
 
       #check if redis is running
       - name: Check if Redis is running

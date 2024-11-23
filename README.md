@@ -11,10 +11,9 @@
 This is the repository for the Devops project at ECE Paris
 
 Made by:
+
 - Nathan DEPRAT [@Macbucheron1](https://github.com/Macbucheron1)
 - Ibrahim Diallo [@Xeroxx75](https://github.com/Xeroxx75)
-
-
 
 ## Install
 
@@ -22,23 +21,23 @@ Follow those step to install the project localy:
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/Macbucheron1/EceDevops_lab1.git
-    ```
+   ```bash
+   git clone https://github.com/Macbucheron1/EceDevops_lab1.git
+   ```
 
 2. Access the project file :
 
-    ```bash
-    cd nom-du-projet
-    ```
+   ```bash
+   cd nom-du-projet
+   ```
 
 3. Install dependencies :
 
-    - With **npm** :
+   - With **npm** :
 
-      ```bash
-      npm install
-      ```
+     ```bash
+     npm install
+     ```
 
 If you correctly followed all of the step you are now ready to use the project.
 
@@ -78,8 +77,8 @@ One of the feature of Github Actions is that it can run on multiple OS. Here is 
 
 ![CI_UserApi_Windows](./images/CI_CD/FailedWindowsCI.png)
 
-The third job is failing because the Redis server is not running. This is because the Redis server is not available on Windows.
-
+The third job is failing because the Redis server is not available on Windows.
+The second one as being stopped because of the error in the third job to economize resources.
 
 ## 3. Configuring and provisioning a virtual environment and run our application using the IaC approach
 

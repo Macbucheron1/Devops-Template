@@ -12,8 +12,10 @@ describe("Redis", () => {
    * Hook that runs before all tests in this suite.
    * Requires the dbClient module to establish a connection to Redis.
    */
-  before(() => {
+  before((done) => {
     db = require("../src/dbClient");
+    db.on("ready", done);
+    db.on("error", done);
   });
 
   /**

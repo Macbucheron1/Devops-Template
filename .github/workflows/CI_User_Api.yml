@@ -35,12 +35,12 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           # Check if WSL2 is installed
-          if wsl --list --quiet | findstr /r "^Ubuntu$"; then
-            echo "Ubuntu is already installed"
-          else
+          if (wsl --list --quiet | Select-String "^Ubuntu$") {
+            Write-Output "Ubuntu is already installed"
+          } else {
             # Install WSL2 and Ubuntu
             wsl --install -d Ubuntu
-          fi
+          }
           # Start Redis server in Ubuntu
           wsl sudo apt-get update
           wsl sudo apt-get install -y redis

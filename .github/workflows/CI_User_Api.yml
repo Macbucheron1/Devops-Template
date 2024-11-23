@@ -8,6 +8,9 @@ env:
   working-directory: ./user_api # Set the working directory
   AZURE_WEBAPP_NAME: UserApi-Mac-Xeroxx    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+  REDIS_HOST: ${{ secrets.REDIS_HOST }}
+  REDIS_PORT: ${{ secrets.REDIS_PORT }}
+  REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
 
 jobs:
 

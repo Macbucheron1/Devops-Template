@@ -48,7 +48,7 @@ Follow those step to install the project localy:
 
 Make sur you are in the `user_api` directory before running the following command.
 
-**1. Start a web server**
+### 1. Start a web server
 
 From the root directory of the project run:
 
@@ -63,7 +63,7 @@ It will start a web server available in your browser at http://localhost:3000.
 
 
 
-**2. Create a user**
+### 2. Create a user
 
 Send a _POST_ (REST protocol) request using terminal:
 
@@ -80,7 +80,7 @@ It will output:
 { "status": "success", "msg": "OK" }
 ```
 
-**3. Get a user**
+### 3. Get a user
 
 Send a _GET_ (REST protocol) request using terminal
 
@@ -96,7 +96,7 @@ It will output:
 { "status": "success", "msg": { "firstname": "Nathan", "lastname": "Deprat" } }
 ```
 
-**4. Update a user**
+### 4. Update a user
 
 Send a _PUT_ (REST protocol) request using terminal
 
@@ -113,7 +113,7 @@ It will output:
 { "status": "success", "msg": "OK" }
 ```
 
-**5. Delete a user**
+### 5. Delete a user
 
 Send a _DELETE_ (REST protocol) request using terminal
 
@@ -129,7 +129,7 @@ It will output:
 { "status": "success", "msg": "Number of rows deleted: 1" }
 ```
 
-**6. Health check**
+### 6. Health check 
 
 Send a _GET_ (REST protocol) request using terminal
 

@@ -49,6 +49,7 @@ jobs:
         run: npm install
         working-directory: ${{env.working-directory}}
 
+      #run linter : ensure code quality by identifying and fixing potential errors, enforcing coding standards, and improving code readability.
       - name: Run Linter
         run: npm run lint
         working-directory: ${{env.working-directory}}

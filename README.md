@@ -54,7 +54,7 @@ To get an complete list of the possibility of the project you can check the [Use
 
 ## 1. Create a Web Application
 
-Find all of the information in the [User API folder](./user_api/README.md). A link to come back to this page is available at the end of the file.
+Find all of the information in the [User API folder](./user_api/README.md). A link to come back to this page is available at the end of the README.
 
 ## 2. Apply CI/CD pipeline
 
@@ -67,7 +67,12 @@ The first CI pipeline we have made is using Github Actions. It is triggered on e
 3. Check if Redis is running
 4. Setup Node.js
 5. Install dependencies
-6. Run the tests for the User API
+6. Run Linter to check the code
+
+   > [!NOTE]
+   > TEST
+
+7. Run the tests for the User API
 
 Here is the result of a successful run:
 

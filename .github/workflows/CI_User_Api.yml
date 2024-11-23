@@ -2,14 +2,16 @@ name: User API CI
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   build:
     strategy: # Define the matrix for the job
       matrix: # We will get 2 jobs : 2 OS * 1 Node.js version * 1 Redis version
         os: [ubuntu-latest, macos-latest]  # All the OS to run the job
-        node_version: ["18.19.1"]  # all the Node.js version
+        node_version: [18.x, 20.x, 22.x]  # all the Node.js version
         redis_version: ["6.x"]  # all the Redis version
 
     name: User API on ${{matrix.os}} using NodeJS ${{matrix.node_version}} and Redis ${{matrix.redis_version}} # name of the job
@@ -21,20 +23,21 @@ jobs:
       run:
         working-directory: ${{env.working-directory}} #set the default working directory
 
+    services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
     steps:
       #checkout the code
       - name: Checkout the code
         uses: actions/checkout@v4
-
-      #setup redis
-      - name: Setup Redis ${{ matrix.redis_version }}
-        uses: shogo82148/actions-setup-redis@v1
-        with:
-          redis-version: ${{ matrix.redis_version }}
-
-      #check if redis is running
-      - name: Check if Redis is running
-        run: redis-cli ping
 
       #setup node.js
       - name: Setup Node.js ${{ matrix.node_version }}

@@ -1,9 +1,8 @@
-# ECE Devops Lab
+# ECE Devops Project
 
-## Table des matières
+## Table of content
 
 - [Description](#description)
-- [Prerequisites](#prerequisites)
 - [Install](#install)
 
 ## Description
@@ -69,8 +68,7 @@ The first CI pipeline we have made is using Github Actions. It is triggered on e
 5. Install dependencies
 6. Run Linter to check the code
 
-   > [!NOTE]
-   > TEST
+   > Linter is a tool that analyze the code to find errors and bugs. It also enforce a coding style. In our case we are using ESLint. You can find the configuration in the [.eslintrc.json](./user_api/.eslintrc.json) file.
 
 7. Run the tests for the User API
 

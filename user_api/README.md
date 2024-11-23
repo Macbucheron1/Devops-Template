@@ -55,13 +55,12 @@ From the root directory of the project run:
 ```bash
 npm start
 ```
+
 ![ApiStart](../images/user_api/ApiStart.png)
 
 It will start a web server available in your browser at http://localhost:3000.
 
 ![WebPage](../images/user_api/WebPage.png)
-
-
 
 ### 2. Create a user
 

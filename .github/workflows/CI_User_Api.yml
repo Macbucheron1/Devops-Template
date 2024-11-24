@@ -35,14 +35,12 @@ jobs:
 
       # Step 2: Setup Redis
       - name: Setup Redis ${{ matrix.redis_version }}
-        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node_version == '18.x' }}
         uses: shogo82148/actions-setup-redis@v1
         with:
           redis-version: ${{ matrix.redis_version }}
 
       # Step 3: Check if Redis is running
       - name: Check if Redis is running
-        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node_version == '18.x' }}
         run: redis-cli ping
 
       # Step 4: Setup Node.js
@@ -62,9 +60,7 @@ jobs:
         run: npm run lint
 
       # Step 7: Run tests to verify the build
-      - name: Running the User API tests  
-        env:
-          USE_REDIS_MOCK: 'true'
+      - name: Running the User API tests
         run: npm test
 
       # Step 8: Upload artifact for deployment only for Ubuntu and Node.js 18.x (because we are deploying only from this configuration)

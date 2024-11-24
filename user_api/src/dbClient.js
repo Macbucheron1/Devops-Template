@@ -4,12 +4,7 @@
  * @module db
  */
 
-var redis;
-if (process.env.USE_REDIS_MOCK === "true") {
-  redis = require("redis-mock");
-} else {
-  redis = require("redis");
-}
+var redis = require("redis");
 require("dotenv").config({ path: ".env.local" });
 
 // Use environment variables for Redis configuration

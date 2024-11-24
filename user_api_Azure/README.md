@@ -15,7 +15,6 @@ It is a basic [NodeJS](https://nodejs.org/en) web application exposing REST API 
 Before trying to install the project make sur to install those technologie:
 
 - **[Node.js](https://nodejs.org/en/download/package-manager)** (v18.19.1 +)
-- **[Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/)** (v7.4.1 +)
 
 ## Installation
 
@@ -44,9 +43,14 @@ Follow those step to install the project localy:
 ## Usage
 
 > [!IMPORTANT]
-> Make sur that **Redis** is running before starting the project. To make sure Redis is running use the command `redis-cli PING` and Redis should answer with `PONG`. If not, start Redis with the command `redis-server`.
+> In order to make to reproduce this project locally you will need to create an [Azure Cache for Redis](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-nodejs-get-started?tabs=entraid&pivots=azure-cache-redis). Add your variables in a `.env` file at the root of the project (same level as _node_modules_).
+> ```bash
+> REDIS_HOST=your_redis_host
+> REDIS_PORT=your_redis_port
+> REDIS_PASSWORD=your_redis_password
+> ```
 
-Make sur you are in the `user_api` directory before running the following command.
+Make sur you are in the `user_api_Azure` directory before running the following command.
 
 ### 1. Start a web server
 
@@ -162,4 +166,4 @@ it will run the test suite and output the result :
 
 ## [Back to main README](../README.md#1-create-a-web-application)
 
-Let's go back to the main README to continue the project's walkthrough.
+Let's go back to the main [README](../README.md#2-apply-cicd-pipeline) to continue the project's walkthrough.

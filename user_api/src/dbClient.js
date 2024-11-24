@@ -5,17 +5,14 @@
  */
 
 var redis = require("redis");
-require("dotenv").config({ path: ".env.local" });
+const configure = require("./configure");
 
-// Use environment variables for Redis configuration
-const REDIS_PORT = process.env.REDIS_PORT || 6379;
-const REDIS_HOST = process.env.REDIS_HOST || "127.0.0.1";
-const REDIS_PASSWORD = process.env.REDIS_PASSWORD || null;
-
-if (!REDIS_HOST || !REDIS_PORT || !REDIS_PASSWORD) {
-  throw new Error("Missing Redis configuration");
-}
-
+/**
+ * Retrieves configuration settings.
+ *
+ * @type {Object}
+ */
+const config = configure();
 
 /**
  * Creates a Redis client with specified host, port, and retry strategy.
@@ -23,10 +20,8 @@ if (!REDIS_HOST || !REDIS_PORT || !REDIS_PASSWORD) {
  * @type {RedisClient}
  */
 var db = redis.createClient({
-  host: REDIS_HOST,
-  port: REDIS_PORT,
-  password: REDIS_PASSWORD,
-  tls: { servername: REDIS_HOST },
+  host: config.redis.host,
+  port: config.redis.port,
   /**
    * Custom retry strategy for the Redis client.
    * Returns an error when retry time is exhausted.
@@ -36,10 +31,6 @@ var db = redis.createClient({
   retry_strategy: () => {
     return new Error("Retry time exhausted");
   },
-});
-
-db.on("error", function (err) {
-  console.error("Redis error: ", err);
 });
 
 /**

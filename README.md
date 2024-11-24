@@ -104,6 +104,8 @@ In the lab correction, zipping the entire repository might have been simpler for
 
 ### CD
 
+For the CD pipeline, we have decided to use Azure Web App. We have created a Web App and a Service Plan on Azure. We have also created a secret in the Github repository to store the Azure credentials. Furthermore, in order to be able to use the API online, we needed to have the Redis server running. We have decided to use the Azure Redis Cache service. We have created a Redis Cache and stored the connection string in the Github secret.
+
 ## 3. Configuring and provisioning a virtual environment and run our application using the IaC approach
 
 ## 4. Building Docker image of our application

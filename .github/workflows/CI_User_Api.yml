@@ -6,21 +6,20 @@ on:
 
 env:
   working-directory: ./user_api # Set the working directory
-  AZURE_WEBAPP_NAME: UserApi-Mac-Xeroxx    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+  AZURE_WEBAPP_NAME: UserApi-Mac-Xeroxx # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: "." # set this to the path to your web app project, defaults to the repository root
   REDIS_HOST: ${{ secrets.REDIS_HOST }}
   REDIS_PORT: ${{ secrets.REDIS_PORT }}
   REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
 
 jobs:
-
   build:
     strategy: # Define the matrix for the job
       matrix: # We will get 6 jobs : 2 OS * 3 Node.js version * 1 Redis version
-        os: [ubuntu-latest, macos-latest]  # All the OS to run the job
-        node_version: [18.x, 20.x, 22.x]  # all the Node.js version
-        redis_version: ["6.x"]  # all the Redis version
-      max-parallel: 1  # This ensures jobs run one after another
+        os: [ubuntu-latest, macos-latest] # All the OS to run the job
+        node_version: [18.x, 20.x, 22.x] # all the Node.js version
+        redis_version: ["6.x"] # all the Redis version
+      max-parallel: 1 # This ensures jobs run one after another
 
     name: User API on ${{matrix.os}} using NodeJS ${{matrix.node_version}} and Redis ${{matrix.redis_version}} # name of the job
     runs-on: ${{ matrix.os }}
@@ -84,7 +83,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: user-api-build
 

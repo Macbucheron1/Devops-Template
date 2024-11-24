@@ -144,7 +144,9 @@ We can see that the CI/CD took much less time to complete.
 
 You can access the User API on Azure **[Right here](https://https://userapi-mac-xeroxx-d9dwg5g4a2hgd2f6.francecentral-01.azurewebsites.net/)**
 
+In the end we have the following tree:
 
+![FinalTree](./images/CI_CD/FinalTree.png)
 
 
 

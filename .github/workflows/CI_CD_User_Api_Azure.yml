@@ -1,10 +1,11 @@
-name: User API CI
+name: User API CI CD Azure
 
 on:
   push:
     branches: ["main"]
     paths:
       - 'user_api_Azure/**'
+      - '.github/workflows/CI_CD_User_Api_Azure.yml'
 
 env:
   working-directory: ./user_api_Azure # Set the working directory

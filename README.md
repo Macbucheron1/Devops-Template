@@ -140,7 +140,11 @@ First of all, one of the longest step is the upload artifact for deployment. By 
 
 ![CD_Result](./images/CI_CD/CD_Result.png)
 
-We can see that the CI/CD took much less time to complete. But we can still optimize
+We can see that the CI/CD took much less time to complete.
+
+You can access the User API on Azure **[Right here](https://https://userapi-mac-xeroxx-d9dwg5g4a2hgd2f6.francecentral-01.azurewebsites.net/)**
+
+
 
 
 

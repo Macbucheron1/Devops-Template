@@ -1,0 +1,59 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  # Check if the vagrant-vbguest plugin is installed
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    # Specify the configuration for the VirtualBox provider
+    config.vm.provider :virtualbox do |vb|
+      # Disable the automatic update of the VirtualBox Guest Additions
+      config.vbguest.auto_update = false
+    end
+  end
+
+  # Define the VM
+  config.vm.define "User Api VM" do |server|
+    # Specify the Vagrant box to use
+    # You can use any box you find on https://portal.cloud.hashicorp.com/vagrant/discover?providers=virtualbox&query=
+    # Just make sur that the NodeJS, NPM and Redis versions are compatible with the user_api
+    server.vm.box = "ubuntu/jammy64"  
+    # Specify the VM port forwarding
+    config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true # Auto correct the port if it is already in use
+    # Sync the user_api folder
+    server.vm.synced_folder "../user_api", "/home/vagrant/user_api", type: "rsync", rsync__exclude: [".git/", "node_modules/"]
+    # Specify the VM specs when using the Virtualbox provisioner
+    server.vm.provider "virtualbox" do |vb|
+      vb.name =  "user_api.server.local"
+      # VM RAM in MB
+      vb.memory = 2048
+      # VM CPUs
+      vb.cpus = 1
+    end
+    config.vm.provider "vmware_desktop" do |vmware|
+      vmware.vmx["memsize"] = "2048"
+      vmware.vmx["numvcpus"] = "1"
+    end
+  end
+
+  
+
+  #Start provisioning 
+  $script = <<-SCRIPT
+    echo Starting provisioning...
+    sudo apt-get update
+    sudo apt-get install -y nodejs
+    sudo apt-get install -y npm
+    sudo apt-get install -y redis-server
+
+    node -v
+    npm -v
+    redis-cli --version
+
+    cd /home/vagrant/user_api
+    npm install
+    npm start
+    SCRIPT
+
+  config.vm.provision "shell", inline: $script
+end

@@ -64,9 +64,10 @@ jobs:
       - name: Running the User API tests
         run: npm test
 
-      # Step 8: Upload artifact for subsequent jobs
+      # Step 8: Upload artifact for deployment only for Ubuntu and Node.js 22.x (because we are deploying only from this configuration)
       - name: Upload artifact for deployment
-        uses: actions/upload-artifact@v3
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node_version == '22.x' }}
+        uses: actions/upload-artifact@v4
         with:
           name: user-api-build
           path: ./user_api

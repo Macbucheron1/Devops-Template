@@ -43,7 +43,7 @@ Follow those step to install the project localy:
 
 ## Usage
 
-> [!IMPORTANT]
+> [!WARNING]
 > Make sur that **Redis** is running before starting the project. To make sure Redis is running use the command `redis-cli PING` and Redis should answer with `PONG`. If not, start Redis with the command `redis-server`.
 
 Make sur you are in the `user_api` directory before running the following command.

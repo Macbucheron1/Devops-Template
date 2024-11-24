@@ -1,4 +1,4 @@
-# User API web application
+# User API on Azure
 
 It is a basic [NodeJS](https://nodejs.org/en) web application exposing REST API that creates and stores user parameters in [Redis database](https://redis.io/).
 
@@ -60,11 +60,11 @@ From the root directory of the project run:
 npm start
 ```
 
-![ApiStart](../images/user_api/ApiStart.png)
+![ApiStart](../images/user_api/ApiStartAzure.png)
 
 It will start a web server available in your browser at http://localhost:3000.
 
-![WebPage](../images/user_api/WebPage.png)
+![WebPage](../images/user_api/UserApiAzure.png)
 
 ### 2. Create a user
 

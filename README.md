@@ -4,6 +4,25 @@
 
 - [Description](#description)
 - [Install](#install)
+- [1. Create a Web Application](#1-create-a-web-application)
+- [2. Apply CI/CD pipeline](#2-apply-cicd-pipeline)
+  - [CI](#ci)
+    - [The steps](#the-steps)
+    - [Multiple OS support](#multiple-os-support)
+    - [Choice justification](#choice-justification)
+  - [CD](#cd)
+    - [The setup](#the-setup)
+    - [Code adaption](#code-adaption)
+    - [The pipeline](#the-pipeline)
+    - [Pipeline duration Optimization](#pipeline-duration-optimization)
+    - [Access the User API on Azure](#access-the-user-api-on-azure)
+- [3. Configuring and provisioning a virtual environment and run our application using the IaC approach](#3-configuring-and-provisioning-a-virtual-environment-and-run-our-application-using-the-iac-approach)
+- [4. Building Docker image of our application](#4-building-docker-image-of-our-application)
+- [5. Making container orchestration using Docker Compose](#5-making-container-orchestration-using-docker-compose)
+- [6. Making docker orchestration using Kubernetes](#6-making-docker-orchestration-using-kubernetes)
+- [7. Making a service mesh using Istio](#7-making-a-service-mesh-using-istio)
+- [8. Implementing Monitoring to our containerized application](#8-implementing-monitoring-to-our-containerized-application)
+
 
 ## Description
 
@@ -24,32 +43,7 @@ Follow those step to install the project localy:
    git clone https://github.com/Macbucheron1/EceDevops_lab1.git
    ```
 
-2. Access the project file :
-
-   ```bash
-   cd nom-du-projet
-   ```
-
-3. Install dependencies :
-
-   - With **npm** :
-
-     ```bash
-     npm install
-     ```
-
 If you correctly followed all of the step you are now ready to use the project.
-
-## Usage
-
-To start the project you can use the following command:
-
-```bash
-npm start
-```
-
-It will start a web server available in your browser at http://localhost:3000.
-To get an complete list of the possibility of the project you can check the [User API folder](./user_api/README.md)
 
 ## 1. Create a Web Application
 
@@ -59,7 +53,11 @@ Find all of the information in the [User API folder](./user_api/README.md). A li
 
 ### CI
 
-The first CI pipeline we have made is using Github Actions. It is triggered on every push on the main branch. It run the following steps:
+CI stand for Continuous Integration. It is a practice in software engineering where the code is automatically tested and checked every time a developer pushes code to the repository. The goal is to find and address bugs and errors as soon as possible.
+
+#### The steps
+
+We have made our CI pipeline using Github Action. It is triggered on every push on the main branch. It run the following steps:
 
 1. Check the code
 2. Setup Redis
@@ -68,6 +66,7 @@ The first CI pipeline we have made is using Github Actions. It is triggered on e
 5. Install dependencies
 6. Run Linter to check the code
 
+   > [!NOTE]
    > Linter is a tool that analyze the code to find errors and bugs. It also enforce a coding style. In our case we are using ESLint. You can find the configuration in the [.eslintrc.json](./user_api/.eslintrc.json) file.
 
 7. Run the tests for the User API
@@ -76,12 +75,13 @@ Here is the result of a successful run:
 
 ![CI_UserApi](./images/CI_CD/CI_UserApi.png)
 
-One of the feature of Github Actions is that it can run on multiple OS. So we are going to use 3 different os. Here is the result of 3 different OS jobs:
+#### Multiple OS support
+
+One of the Goal of the CI pipeline is to make sure that the code is working on mutiple platform and OS. Therefore, we have added a job to run the CI pipeline on MacOS and Windows. Here is the result of the CI pipeline on MacOS and Windows:
 
 ![CI_UserApi_Windows](./images/CI_CD/FailedWindowsCI.png)
 
-The third job is failing because the Redis server is not available on Windows.
-The second one as being stopped because of the error in the third job to economize resources.
+The job failed on Windows because we are using Redis. Redis is not available on Windows ! 
 
 We have to remove the Windows job to have a successful run on all OS. Therefore our final CI pipeline is only running on MacOS and Linux.
 
@@ -89,18 +89,23 @@ Now here is the result of successful jobs on Linux and MacOS:
 
 ![UbuntuMacOSResult](./images/CI_CD/UbuntuMacOsCIResult.png)
 
+> [!TIP]
+> We could have created a separeted job for the Windows runner and use a docker container with Redis to make it work. But we have decided to keep it simple for this project.
+
 _For the next parts we also jobs for the different Node.js version_
+
+#### Choice justification
 
 _**Why did we install Redis instead of using a container?**_
 
-We have chosen to install Redis in order to make it work on Linux AND MacOS. Indeed, [Docker container are not available on MacOS](https://docs.github.com/en/actions/sharing-automations/creating-actions/about-custom-actions#types-of-actions). Therefore, we have to install Redis on the host machine in order to make it work on MacOS.
+We have chosen to install Redis in order to make it work on Linux AND MacOS. Indeed, [Docker container are not available only available on Linux](https://docs.github.com/en/actions/sharing-automations/creating-actions/about-custom-actions#types-of-actions). Therefore, we have to install Redis on the host machine in order to make it work on MacOS.
 
-_**Why did we uploads the user_api directory as an artifact instead of zipping all file in the repository and upload it as the deployment artifact ?** (As it was done in the [lab correction](https://github.com/adaltas/ece-devops-2024-fall/blob/main/modules/05.ci-cd/lab-corrections/master_user-api.yml))_
+_**Why did we upload the user_api directory as an artifact instead of zipping all files in the repository and uploading it as the deployment artifact?** (As it was done in the [lab correction](https://github.com/adaltas/ece-devops-2024-fall/blob/main/modules/05.ci-cd/lab-corrections/master_user-api.yml))_
 
-This choice was made from multiple reasons:
+This choice was made for multiple reasons:
 
-   1. By uploading the `user_api` directory, we are only uploading the necessary files for the User API. This is more efficient than uploading the whole repository.
-   2. Using `user_api` allows the artifact to be easily consummed in Docker-based and non-Docker-based deployment scenarios.
+1. By uploading the `user_api` directory, we are only uploading the necessary files for the User API. This is more efficient than uploading the whole repository.
+2. Using `user_api` allows the artifact to be easily consumed in Docker-based and non-Docker-based deployment scenarios.
 
 In the lab correction, zipping the entire repository might have been simpler for a single deployment job focused on Azure Web App. However, in our case, the multi-job nature of the pipeline and the future integration of Docker-based deployment made the `user_api` directory a better choice.
 
@@ -108,7 +113,10 @@ In the lab correction, zipping the entire repository might have been simpler for
 
 #### The setup
 
-For the CD pipeline, we have decided to use Azure Web App. We have created a Web App and a Service Plan on Azure. We have also created a secret in the Github repository to store the Azure credentials.
+> [!IMPORTANT]
+> In order to make the api working online, we have use Azure Cache for Redis. To keep our project clean we have separated in the code for the [User API using local Redis](./user_api/README.md) from [User API for Azure](./user_api_Azure/README.md). We also added another workflow, separating the [CI pipeline using Redis Localy](./.github/workflows/CI_User_Api.yaml) from the [CI/CD pipeline for Azure](./.github/workflows/CI_CD_User_Api_Azure.yml) file. 
+
+For the CD pipeline, we have decided to use Azure Web App. We have created a Web App and a Service Plan on Azure. We have also created a secret in the Github repository to store the Azure credentials. 
 
 ![Web App](./images/CI_CD/WebApp.png)
 
@@ -132,6 +140,8 @@ Finally, after all the test and the deployment, we have a successful pipeline:
 
 ![CI_CD_BigTime](./images/CI_CD/CI_CD_BigTime.png)
 
+#### Pipeline duration Optimization
+
 _**27m 50s ? Why so much time for a simple CRUD api ?**_
 
 The pipeline is taking a long time to complete because we cannot use parallel jobs in our case. Since we are using Azure Cache for Redis, all the runner use the same database and not an independent redis server. Therefore, making parallel jobs would make the pipeline fail because of the database conflict.
@@ -143,6 +153,10 @@ First of all, one of the longest step is the upload artifact for deployment. By 
 ![CD_Result](./images/CI_CD/CD_Result.png)
 
 We can see that the CI/CD took much less time to complete.
+
+Furtheremore we can also delete the installation of Redis. Indeed, since we are using Azure Cache for Redis, our API is only connecting to this online database. We can remove the Redis installation and the Redis check from the [CI pipeline](./.github/workflows/CI_CD_User_Api_Azure.yml).
+
+#### Access the User API on Azure
 
 You can access the User API on Azure **[Right here](https://https://userapi-mac-xeroxx-d9dwg5g4a2hgd2f6.francecentral-01.azurewebsites.net/)**
 

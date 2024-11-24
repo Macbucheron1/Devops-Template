@@ -20,7 +20,7 @@ const app = express();
  *
  * @type {number}
  */
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 /**
  * Import the database client.

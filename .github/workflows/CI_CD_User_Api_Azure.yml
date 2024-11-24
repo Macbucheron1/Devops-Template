@@ -36,6 +36,8 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v4
 
+      # Removed the Redis setup step as we are not using Redis localy in the Azure deployment
+
       # Step 2: Setup Node.js
       - name: Setup Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v4

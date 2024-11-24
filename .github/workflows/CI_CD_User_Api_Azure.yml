@@ -36,17 +36,7 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v4
 
-      # Step 2: Setup Redis
-      - name: Setup Redis ${{ matrix.redis_version }}
-        uses: shogo82148/actions-setup-redis@v1
-        with:
-          redis-version: ${{ matrix.redis_version }}
-
-      # Step 3: Check if Redis is running
-      - name: Check if Redis is running
-        run: redis-cli ping
-
-      # Step 4: Setup Node.js
+      # Step 2: Setup Node.js
       - name: Setup Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v4
         with:
@@ -54,19 +44,19 @@ jobs:
           node-version: ${{ matrix.node_version }}
           cache: "npm"
 
-      # Step 5: Install project dependencies
+      # Step 3: Install project dependencies
       - name: Install Node dependencies
         run: npm install
 
-      # Step 6: Run linter
+      # Step 4: Run linter
       - name: Run Linter
         run: npm run lint
 
-      # Step 7: Run tests to verify the build
+      # Step 5: Run tests to verify the build
       - name: Running the User API tests
         run: npm test
 
-      # Step 8: Upload artifact for deployment only for Ubuntu and Node.js 18.x (because we are deploying only from this configuration)
+      # Step 6: Upload artifact for deployment only for Ubuntu and Node.js 18.x (because we are deploying only from this configuration)
       - name: Upload artifact for deployment
         if: ${{ matrix.os == 'ubuntu-latest' && matrix.node_version == '18.x' }}
         uses: actions/upload-artifact@v4
@@ -95,13 +85,13 @@ jobs:
 
     steps:
 
-      # Download the build artifact from the 'build' job using the 'actions/download-artifact' action.
+      # Step 1: Download the build artifact from the 'build' job using the 'actions/download-artifact' action.
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: user-api-build
 
-      # Deploy the application to Azure Web App Service using the 'azure/webapps-deploy' action.
+      # Step 2: Deploy the application to Azure Web App Service using the 'azure/webapps-deploy' action.
       - name: "Deploy to Azure WebApp"
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2

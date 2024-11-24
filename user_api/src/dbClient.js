@@ -33,6 +33,15 @@ var db = redis.createClient({
   },
 });
 
+db.on("ready", () => {
+  console.log("Connected to Redis");
+});
+
+db.on("error", (err) => {
+  console.error("Redis connection error:", err);
+});
+
+
 /**
  * Gracefully handles process termination by quitting the Redis client.
  */

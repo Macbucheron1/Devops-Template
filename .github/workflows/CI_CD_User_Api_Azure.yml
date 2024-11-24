@@ -3,9 +3,11 @@ name: User API CI
 on:
   push:
     branches: ["main"]
+    paths:
+      - 'user_api_Azure/**'
 
 env:
-  working-directory: ./user_api # Set the working directory
+  working-directory: ./user_api_Azure # Set the working directory
   AZURE_WEBAPP_NAME: UserApi-Mac-Xeroxx # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: "." # set this to the path to your web app project, defaults to the repository root
   REDIS_HOST: ${{ secrets.REDIS_HOST }}
@@ -69,7 +71,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: user-api-build
-          path: ./user_api
+          path: ./user_api_Azure
           
           
   deploy: # This job deploys the application to Azure Web App Service.
@@ -85,6 +87,10 @@ jobs:
     # It runs on the latest Ubuntu runner and depends on the 'build' job.
     runs-on: ubuntu-latest
     needs: build 
+
+    # Name of the deployment
+    environment:
+      name: "Development"
 
     steps:
 

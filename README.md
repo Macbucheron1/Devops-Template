@@ -132,9 +132,11 @@ Finally, after all the test and the deployment, we have a successful pipeline:
 
 ![CI_CD_BigTime](./images/CI_CD/CI_CD_BigTime.png)
 
-You may notice the huge total duration. The reason for this long duration is that we cannot have the runners running all at the same time. Since they are all using the shared database, we have to wait for the previous job to finish before starting the next one to avoid conflicts during the tests.
+_**27m 50s ? Why so much time for a simple CRUD api ?**_
 
-But surely we can find some optimization to reduce this duration.
+The pipeline is taking a long time to complete because we cannot use parallel jobs in our case. Since we are using Azure Cache for Redis, all the runner use the same database and not an independent redis server. Therefore, making parallel jobs would make the pipeline fail because of the database conflict.
+
+_**How to otpimize our pipeline to reduce this duration**_
 
 First of all, one of the longest step is the upload artifact for deployment. By looking at our Web App specification, we can see that it uses Node JS 18. And since the web server is running on ubuntu-latest, we can only upload the artifact on the ubuntu-latest & Node Js 18 runner.
 
@@ -143,11 +145,6 @@ First of all, one of the longest step is the upload artifact for deployment. By 
 We can see that the CI/CD took much less time to complete.
 
 You can access the User API on Azure **[Right here](https://https://userapi-mac-xeroxx-d9dwg5g4a2hgd2f6.francecentral-01.azurewebsites.net/)**
-
-In the end we have the following tree:
-
-![FinalTree](./images/CI_CD/FinalTree.png)
-
 
 
 ## 3. Configuring and provisioning a virtual environment and run our application using the IaC approach

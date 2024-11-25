@@ -1,7 +1,0 @@
-- name: Check the health of the application
-  command: curl -s http://localhost:3000/health
-  register: health_check
-
-- name: print health check
-  debug:
-    var: health_check.stdout

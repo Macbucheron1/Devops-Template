@@ -3,11 +3,6 @@
   apt:
     update_cache: yes
 
-- name: Install curl
-  apt:
-    name: curl
-    state: latest
-
 - name: Install Node.js
   apt:
     name: nodejs

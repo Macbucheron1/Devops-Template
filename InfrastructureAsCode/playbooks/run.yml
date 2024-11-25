@@ -8,9 +8,3 @@
     
     - role: test
       tags: test
-
-    - role: launch
-      tags: launch
-
-    - role: health
-      tags: health

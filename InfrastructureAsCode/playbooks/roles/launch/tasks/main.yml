@@ -1,8 +1,0 @@
-- name: Run the application in the background
-  command: nohup npm start --prefix /home/vagrant/user_api &
-
-- name: Wait for the application to start
-  wait_for:
-    port: 3000
-    delay: 5
-    timeout: 30

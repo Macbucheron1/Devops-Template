@@ -163,6 +163,91 @@ You can access the User API on Azure **[Right here](https://https://userapi-mac-
 
 ## 3. Configuring and provisioning a virtual environment and run our application using the IaC approach
 
+The goal of this part is to create a virtual machine using the IaC approach. We have decided to use [Vagrant](https://www.vagrantup.com/) to create the virtual machine.
+Then we will use [Ansible](https://www.ansible.com/) to provision the virtual machine and run our application.
+
+### Alocating the Virtual Machine
+
+We have created a [Vagrantfile](./InfrastructureAsCode/Vagrantfile) in the [InfrastructureAsCode](./InfrastructureAsCode/) directory. This file will create a virtual machine with the following specification:
+- OS: Ubuntu 20.04
+  > We chose Ubuntu 20.04, we wanted to change what we used in the previous labs in order to get better understanding of vagrant 
+- RAM: 2048 MB
+- CPU: 1
+- Forwarded port: 3000 -> 3000
+  > We are forwarding the port 3000 from the host machine to the virtual machine. This is the port where our User API is running. By doing this, we can access the User API from the host machine.
+
+### Provisioning the Virtual Machine
+
+We have created an [Ansible playbook](./InfrastructureAsCode/playbooks/run.yml) in the [playbooks](./InfrastructureAsCode/playbooks/) directory.
+This playbook run the following roles/tasks:
+- [Install](./InfrastructureAsCode/playbooks/roles/install/tasks/main.yml)
+  - Update the package list
+  - Install Node.js
+  - Install npm
+  - Install Redis
+  - Install Node packages
+- [Tests](./InfrastructureAsCode/playbooks/roles/tests/tasks/main.yml)
+  - Check Redis is running
+  - Run the User API Tests
+  - Run lint tests
+
+Finally, we provision the virtual machine using the following command to start the application:
+
+```bash
+echo "The VM is running"
+cd /home/vagrant/user_api
+npm start
+```
+
+### Usage
+
+To use the virtual machine, you have to run the following command:
+
+1. Move to the [InfrastructureAsCode](./InfrastructureAsCode/) directory:
+
+    ```bash
+    cd InfrastructureAsCode
+    ```
+
+2. Start the virtual machine:
+
+    ```bash
+    vagrant up
+    ```
+
+3. In your host machine, you can now access the User API at [http://localhost:3000](http://localhost:3000) or use `curl` to check that the API is running:
+  
+    ```bash
+    curl http://localhost:3000/health
+    ```
+    
+### Demonstration
+
+Let's start the virtual machine:
+
+![iac_launch1](./images/iac/IAC_launch1.png)
+![iac_launch2](./images/iac/IAC_launch2.png)
+
+Great ! The virtual machine is running. Now let's check that the User API is running:
+
+
+
+### Destroy or stop the virtual machine
+
+To stop the virtual machine, you can run the following command:
+
+```bash
+vagrant halt
+```
+
+To destroy the virtual machine, you can run the following command:
+
+```bash
+vagrant destroy
+```
+
+
+
 ## 4. Building Docker image of our application
 
 ## 5. Making container orchestration using Docker Compose

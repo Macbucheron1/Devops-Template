@@ -1,3 +1,6 @@
+- name: Redis server test
+  command: redis-cli ping
+
 - name: Test application
   command: npm test --prefix /home/vagrant/user_api
 

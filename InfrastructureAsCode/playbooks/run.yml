@@ -1,0 +1,16 @@
+- hosts: user_api_vm
+  # Run commands as root
+  become: true
+  # Roles to be executed on these hosts
+  roles:
+    - role: install
+      tags: install
+    
+    - role: test
+      tags: test
+
+    - role: launch
+      tags: launch
+
+    - role: health
+      tags: health

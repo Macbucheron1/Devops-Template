@@ -1,0 +1,5 @@
+- name: Test application
+  command: npm test --prefix /home/vagrant/user_api
+
+- name: Test using lint
+  command: npm run lint --prefix /home/vagrant/user_api

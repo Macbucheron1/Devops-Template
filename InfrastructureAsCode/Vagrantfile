@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   end
 
   # Define the VM
-  config.vm.define "User Api VM" do |server|
+  config.vm.define "user_api_vm" do |server|
     # Specify the Vagrant box to use
     # You can use any box you find on https://portal.cloud.hashicorp.com/vagrant/discover?providers=virtualbox&query=
     # Just make sur that the NodeJS, NPM and Redis versions are compatible with the user_api
@@ -36,24 +36,18 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  
+  # Use Vagrant Ansible provisioner
+  config.vm.provision "ansible_local" do |ansible|
+    # The path to the playbooks entry point
+    ansible.playbook = "playbooks/run.yml"
+    # Only run the roles with these tags
+    ansible.tags = "install", "test"
+  end
 
-  #Start provisioning 
-  $script = <<-SCRIPT
-    echo Starting provisioning...
-    sudo apt-get update
-    sudo apt-get install -y nodejs
-    sudo apt-get install -y npm
-    sudo apt-get install -y redis-server
-
-    node -v
-    npm -v
-    redis-cli --version
-
+  config.vm.provision "shell", inline: <<-SHELL
+    # It is running !
+    echo "The VM is running"
     cd /home/vagrant/user_api
-    npm install
     npm start
-    SCRIPT
-
-  config.vm.provision "shell", inline: $script
+  SHELL
 end

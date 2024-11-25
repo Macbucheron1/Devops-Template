@@ -1,0 +1,28 @@
+# InfrastructureAsCode/roles/user_api/tasks/main.yml
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install curl
+  apt:
+    name: curl
+    state: latest
+
+- name: Install Node.js
+  apt:
+    name: nodejs
+    state: latest
+
+- name: Install npm
+  apt:
+    name: npm
+    state: latest
+
+- name: Install Redis server
+  apt:
+    name: redis-server
+    state: latest
+
+- name: Install Node packages
+  command: npm install --prefix /home/vagrant/user_api
+

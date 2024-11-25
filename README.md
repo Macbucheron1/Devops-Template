@@ -169,8 +169,8 @@ Then we will use [Ansible](https://www.ansible.com/) to provision the virtual ma
 ### Alocating the Virtual Machine
 
 We have created a [Vagrantfile](./InfrastructureAsCode/Vagrantfile) in the [InfrastructureAsCode](./InfrastructureAsCode/) directory. This file will create a virtual machine with the following specification:
-- OS: Ubuntu 20.04
-  > We chose Ubuntu 20.04, we wanted to change what we used in the previous labs in order to get better understanding of vagrant 
+- OS: [Ubuntu](https://portal.cloud.hashicorp.com/vagrant/discover/ubuntu/jammy64)
+  > We chose Ubuntu, we wanted to change what we used in the previous labs in order to get better understanding of vagrant 
 - RAM: 2048 MB
 - CPU: 1
 - Forwarded port: 3000 -> 3000
@@ -203,6 +203,9 @@ npm start
 
 To use the virtual machine, you have to run the following command:
 
+> [!Important]
+> You will need to have [Vagrant](https://developer.hashicorp.com/vagrant/install) and [Virtual box](https://www.virtualbox.org/wiki/Downloads)installed on your machine to do this part. 
+
 1. Move to the [InfrastructureAsCode](./InfrastructureAsCode/) directory:
 
     ```bash
@@ -220,6 +223,9 @@ To use the virtual machine, you have to run the following command:
     ```bash
     curl http://localhost:3000/health
     ```
+
+> [!CAUTION] 
+> Sometimes you can get error when testing the API because of some process running on the port 3000. If you get an error, you can run the following command to kill the process: `kill -9 $(lsof -ti:3000)`
     
 ### Demonstration
 
@@ -228,9 +234,11 @@ Let's start the virtual machine:
 ![iac_launch1](./images/iac/IAC_launch1.png)
 ![iac_launch2](./images/iac/IAC_launch2.png)
 
-Great ! The virtual machine is running. Now let's check that the User API is running:
+Great ! The virtual machine is running and all the test have pasted. Now let's check that the User API is running:
 
+![curlResult](./images/iac/curlResult_IAC.png)
 
+It is working smoothly.
 
 ### Destroy or stop the virtual machine
 
@@ -257,3 +265,9 @@ vagrant destroy
 ## 7. Making a service mesh using Istio
 
 ## 8. Implementing Monitoring to our containerized application
+
+## To ask
+
+- Do you expect us the readme to be more like a walkthrough or a formal documentation ?
+
+## To do

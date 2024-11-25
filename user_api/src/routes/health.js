@@ -29,24 +29,24 @@ const healthRouter = express.Router();
  *       503:
  *         description: App unhealthy
  */
-healthRouter.get("/", async (req, res) => {
+healthRouter.get("/", (req, res) => {
   const healthcheck = {
     uptime: process.uptime(),
     status: "OK",
     timestamp: Date.now(),
   };
 
-  try {
-    if (db.server_info.aof_last_write_status === "ok")
-      res.status(200).send(healthcheck);
-    else {
+  db.ping((err, result) => {
+    if (err || result !== "PONG") {
+      console.error("Redis ping failed:", err);
       healthcheck.status = "error";
-      res.status(503).send(healthcheck);
+      return res.status(503).send(healthcheck);
+    } else {
+      // Redis is healthy
+      return res.status(200).send(healthcheck);
     }
-  } catch (error) {
-    healthcheck.status = "error";
-    res.status(503).send(healthcheck);
-  }
+  });
 });
+
 
 module.exports = healthRouter;

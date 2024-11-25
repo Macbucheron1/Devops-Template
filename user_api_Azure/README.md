@@ -66,6 +66,9 @@ It will start a web server available in your browser at http://localhost:3000.
 
 ![WebPage](../images/user_api/UserApiAzure.png)
 
+> [!CAUTION] 
+> Sometimes you can get error when testing the API because of some process running on the port 3000. If you get an error, you can run the following command to kill the process: `kill -9 $(lsof -ti:3000)`
+
 ### 2. Create a user
 
 Send a _POST_ (REST protocol) request using terminal:

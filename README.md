@@ -40,15 +40,21 @@ Made by:
 
 ## Install
 
-Follow those step to install the project localy:
+Follow this step to install the project localy:
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/Macbucheron1/EceDevops_lab1.git
-   ```
+    HTTP:
+    ```bash
+    git clone https://github.com/Macbucheron1/devops_project.git
+    ```
+    SSH:
+    ```bash
+    git clone git@github.com:Macbucheron1/devops_project.git
+    ```
 
-If you correctly followed all of the step you are now ready to use the project.
+
+You are now ready to use the project.
 
 ## 1. Create a Web Application
 

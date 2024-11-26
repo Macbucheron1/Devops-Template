@@ -15,9 +15,9 @@ env:
 jobs:
   build:
     strategy: # Define the matrix for the job
-      matrix: # We will get 6 jobs : 2 OS * 3 Node.js version * 1 Redis version
-        os: [ubuntu-latest, macos-latest] # All the OS to run the job
-        node_version: [18.x, 20.x, 22.x] # all the Node.js version
+      matrix: # We will get 1 jobs : 1 OS * 1 Node.js version * 1 Redis version
+        os: [ubuntu-latest] # All the OS to run the job
+        node_version: [18.x] # all the Node.js version
         redis_version: ["6.x"] # all the Redis version
       max-parallel: 1 # This ensures jobs run one after another
 

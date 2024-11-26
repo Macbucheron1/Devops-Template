@@ -3,8 +3,10 @@
   become: true
   # Roles to be executed on these hosts
   roles:
+    # Install role
     - role: install
       tags: install
     
+    # Configure role
     - role: test
       tags: test

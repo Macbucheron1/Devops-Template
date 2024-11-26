@@ -1,4 +1,3 @@
-# InfrastructureAsCode/roles/user_api/tasks/main.yml
 - name: Update apt cache
   apt:
     update_cache: yes

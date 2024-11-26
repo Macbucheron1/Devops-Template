@@ -1,0 +1,15 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    volumes:
+      - db_data:/data
+  userapi:
+    image: macbucheron/user_api:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+volumes:
+  db_data: {}

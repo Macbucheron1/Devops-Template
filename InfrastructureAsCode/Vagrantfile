@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
     # Specify the VM port forwarding
     config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true # Auto correct the port if it is already in use
     # Sync the user_api folder
-    server.vm.synced_folder "../user_api", "/home/vagrant/user_api", type: "rsync", rsync__exclude: [".git/", "node_modules/"]
+    server.vm.synced_folder "../user_api", "/home/vagrant/user_api", type: "rsync", rsync__exclude: ["*.git/", "node_modules/", "*.md"]
     # Specify the VM specs when using the Virtualbox provisioner
     server.vm.provider "virtualbox" do |vb|
       vb.name =  "user_api.server.local"

@@ -125,5 +125,5 @@ jobs:
           context: ./user_api
           file: ./user_api/Dockerfile
           push: true
-          tags: "macbucheron/user_appi:latest"
+          tags: "macbucheron/user_api:latest"
           labels: ${{ steps.meta.outputs.labels }}

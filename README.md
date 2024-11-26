@@ -265,9 +265,41 @@ To destroy the virtual machine, you can run the following command:
 vagrant destroy
 ```
 
-
-
 ## 4. Building Docker image of our application
+
+### Building the Docker image
+
+### Running the Docker image
+
+### Publishing the Docker image
+
+#### Using Basic Docker push
+
+It is quite simple to publish a Docker image on Docker Hub. We just have to follow these steps:
+
+1. Login to Docker Hub:
+
+    ```bash
+    docker login
+    ```
+    You will be asked to enter your Docker Hub credentials.
+
+2. Make sure that the image is tagged correctly:
+
+    ```bash
+    docker tag current_tag macbucheron/user_api:latest
+    ```
+  
+3. Push the image to Docker Hub:
+
+    ```bash
+    docker push macbucheron/user_api:latest
+    ```
+
+#### Using Github Actions 
+
+We can automate the process of building and publishing the Docker image using Github Actions. We have modified 
+
 
 ## 5. Making container orchestration using Docker Compose
 

@@ -267,7 +267,12 @@ vagrant destroy
 
 ## 4. Building Docker image of our application
 
+To create a docker image we first need a [Docker File](./user_api/Dockerfile). This file is responsible for the creation of the image.
+
+Certain file are useless to the docker image. We added them to the [.dockerignore](./user_api/.dockerignore)
+
 ### Building the Docker image
+
 
 ### Running the Docker image
 
@@ -298,8 +303,21 @@ It is quite simple to publish a Docker image on Docker Hub. We just have to foll
 
 #### Using Github Actions 
 
-We can automate the process of building and publishing the Docker image using Github Actions. We have modified 
+We can automate the process of building and publishing the Docker image using Github Actions. We created a new [workflow](.github/workflows/CI_DockerHub_Publisher_User_Api.yml). In this worklow we use a CI pipeline and then we push to the docker hub. 
 
+Here is what the [github worklow](https://github.com/Macbucheron1/devops_project/actions/workflows/CI_DockerHub_Publisher_User_Api.yml) looks like
+
+![Git worflow](./images/docker/actualWorkflow.png)
+
+Because we use [docker/setup-buildx-action@v3](https://github.com/docker/setup-buildx-action), we also get a nice Docker Build summary
+
+![Docker Push Summary](./images/docker/dockerPushSummary.png)
+
+> [!TIP]
+> We could have make only one worklow using the one we have created for Azure.
+> It would have look like this : 
+> ![united workflow](./images/docker/gitFlowUnited.png)
+> For clarity purpose we have decided to split them
 
 ## 5. Making container orchestration using Docker Compose
 

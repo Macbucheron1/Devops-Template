@@ -1,5 +1,6 @@
 node_modules
 .*
+!.dockerignore
 !.github
 !.gitignore
 !.eslintignore

@@ -1,7 +1,5 @@
 # This is a Docker Compose file that defines the services and volumes
-# 
-# version: Specifies the version of the Docker Compose file format.
-# 
+#  
 # services: Defines the services to be run.
 # 
 # redis: A service that uses the official Redis image.
@@ -19,7 +17,6 @@
 # 
 # db_data: A named volume used by the Redis service to persist data.
 
-version: '3'
 services:
   redis:
     image: redis

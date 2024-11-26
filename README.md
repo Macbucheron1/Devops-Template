@@ -273,8 +273,35 @@ Certain file are useless to the docker image. We added them to the [.dockerignor
 
 ### Building the Docker image
 
+Go to the  `user_api` folder
+
+```bash
+cd user_api
+```
+
+And then just built the image !
+
+```bash
+docker build -t macbucheron/user_api .
+```
 
 ### Running the Docker image
+
+To use the docker image use the following command :
+ 
+```bash
+docker run -p 12345:3000 -d user_api
+```
+
+or to use the image available on the Dockerhub:
+```bash
+docker run -p 12345:3000 -d macbucheron/user_api
+```
+
+> [!CAUTION]
+> The image as it is, is not connected to a redis database. If you want to use the image without using the docker compose file :
+> use `redis-server` to launch redis
+> use `docker run --network host -d user_api` to launch the image
 
 ### Publishing the Docker image
 
@@ -289,13 +316,13 @@ It is quite simple to publish a Docker image on Docker Hub. We just have to foll
     ```
     You will be asked to enter your Docker Hub credentials.
 
-2. Make sure that the image is tagged correctly:
-
-    ```bash
-    docker tag current_tag macbucheron/user_api:latest
-    ```
+> [!WARNING]
+> Make that the tag follow the right typologie
+>```bash
+>docker tag current_tag macbucheron/user_api:latest
+>```
   
-3. Push the image to Docker Hub:
+2. Push the image to Docker Hub:
 
     ```bash
     docker push macbucheron/user_api:latest
@@ -319,7 +346,42 @@ Because we use [docker/setup-buildx-action@v3](https://github.com/docker/setup-b
 > ![united workflow](./images/docker/gitFlowUnited.png)
 > For clarity purpose we have decided to split them
 
+The image is now available on the Docker Hub :
+![Docker Hub](./images/docker/dockerHub.png)
+
 ## 5. Making container orchestration using Docker Compose
+
+In order to use our application we need two services : 
+- Redis 
+- user_api
+
+We have already created a Docker image for [user_api](./user_api/Dockerfile). We can just pull the latest image of redis in the docker compose file. 
+
+The final result can be seen in the [docker-compose.yml](./docker-compose.yml) file.
+
+To run the docker compose file, you just have to run the following command:
+
+```bash
+docker-compose up
+```
+
+Here is the result of the command:
+
+![test](./images/docker/DockerCompose.png)
+
+You can now access the User API at [http://localhost:3000](http://localhost:3000) or use `curl` to check that the API is running:
+
+```bash
+curl http://localhost:3000/health
+```
+
+To stop the docker compose, you can run the following command:
+
+```bash
+docker-compose down
+```
+
+We also implemented persistent storage for the Redis database. The data is stored in the `db_data` volume. This way, the data is not lost when the container is stopped.
 
 ## 6. Making docker orchestration using Kubernetes
 

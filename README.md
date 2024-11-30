@@ -29,8 +29,15 @@
     - [Using Basic Docker push](#using-basic-docker-push)
     - [Using Github Actions](#using-github-actions)
 - [5. Making container orchestration using Docker Compose](#5-making-container-orchestration-using-docker-compose)
-
 - [6. Making docker orchestration using Kubernetes](#6-making-docker-orchestration-using-kubernetes)
+  - [Prerequisites](#prerequisites)
+  - [1. Deploying](#1-deploying)
+    - [user-api deployment.yaml](#user-api-deploymentyaml)
+    - [redis deployment.yaml](#redis-deploymentyaml)
+  - [2. Exposing the service](#2-exposing-the-service)
+  - [3. Use persistent storage](#3-use-persistent-storage)
+  - [4. Usage](#4-usage)
+  - [5. Delete](#5-delete)
 - [7. Making a service mesh using Istio](#7-making-a-service-mesh-using-istio)
 - [8. Implementing Monitoring to our containerized application](#8-implementing-monitoring-to-our-containerized-application)
 

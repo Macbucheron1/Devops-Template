@@ -24,23 +24,38 @@ var db = redis.createClient({
   port: process.env.REDIS_PORT || config.redis.port,
   /**
    * Custom retry strategy for the Redis client.
-   * Returns an error when retry time is exhausted.
+   * Retries every 10 seconds when an error occurs.
    *
-   * @returns {Error}
+   * @returns {number|Error}
    */
-  retry_strategy: () => {
-    return new Error("Retry time exhausted");
+  retry_strategy: (options) => {
+    console.log("Retry strategy called", options);
+    if (options.error && options.error.code === "ECONNREFUSED") {
+      console.error("The server refused the connection");
+      if (options.attempt > 10) {
+        console.error("Max attempts reached");
+        return false;
+      }
+      return 5000;
+    }
+    if (options.total_retry_time > 1000 * 60 * 60) {
+      console.error("Retry time exhausted");
+      return new Error("Retry time exhausted");
+    }
+    // Reconnect after 5 seconds
+    console.log("Reconnecting in 5 seconds");
+    return 5000;
   },
 });
 
-db.on("ready", () => {
-  console.log("Connected to Redis");
-});
-
 db.on("error", (err) => {
+  console.log(db);
   console.error("Redis connection error:", err);
 });
 
+db.on("ready", () => {
+  console.log("Successfully connected to Redis after retrying.");
+});
 
 /**
  * Gracefully handles process termination by quitting the Redis client.

@@ -1,0 +1,12 @@
+apiVersion: v1 
+kind: Service
+metadata:
+  name: user-api-service  # Name of the service
+spec:
+  selector:
+    app: user-api  # Select pods with label 'app: user-api'
+  type: LoadBalancer  # Expose the service externally using a load balancer
+  ports:
+    - protocol: TCP
+      port: 3000  # External port accessible to clients
+      targetPort: 3000  # Port on the pod to forward traffic to

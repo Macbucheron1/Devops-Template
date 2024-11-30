@@ -1,0 +1,36 @@
+apiVersion: apps/v1               # Specifies the API version
+kind: Deployment                  # Defines the resource type as Deployment
+metadata:
+  name: redis-deployment          # Name of the Deployment
+spec:
+  replicas: 1                     # Number of desired pod replicas
+  selector:
+    matchLabels:
+      app: redis                  # Selector to match pods with label app: redis
+  template:
+    metadata:
+      labels:
+        app: redis                # Labels to apply to the pods
+    spec:
+      containers:
+        - name: redis             # Container name
+          image: redis:6.2.6      # Redis image version
+          volumeMounts:
+            - name: redis-storage # Mounts the volume to the container
+              mountPath: /data    # Mount path inside the container
+          ports:
+            - containerPort: 6379 # Exposes port 6379
+          livenessProbe:          # Liveness probe configuration
+            tcpSocket:
+              port: 6379          # Probes TCP socket on port 6379
+            initialDelaySeconds: 30 # Delay before liveness probe starts
+            periodSeconds: 10     # Time between probes
+          readinessProbe:         # Readiness probe configuration
+            tcpSocket:
+              port: 6379          # Probes TCP socket on port 6379
+            initialDelaySeconds: 5  # Delay before readiness probe starts
+            periodSeconds: 10     # Time between probes
+      volumes:
+        - name: redis-storage     # Volume name
+          persistentVolumeClaim:
+            claimName: redis-pvc  # References the PersistentVolumeClaim

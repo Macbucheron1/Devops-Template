@@ -23,7 +23,13 @@
   - [Demonstration](#demonstration)
   - [Destroy or stop the virtual machine](#destroy-or-stop-the-virtual-machine)
 - [4. Building Docker image of our application](#4-building-docker-image-of-our-application)
+  - [Building the Docker image](#building-the-docker-image)
+  - [Running the Docker image](#running-the-docker-image)
+  - [Publishing the Docker image](#publishing-the-docker-image)
+    - [Using Basic Docker push](#using-basic-docker-push)
+    - [Using Github Actions](#using-github-actions)
 - [5. Making container orchestration using Docker Compose](#5-making-container-orchestration-using-docker-compose)
+
 - [6. Making docker orchestration using Kubernetes](#6-making-docker-orchestration-using-kubernetes)
 - [7. Making a service mesh using Istio](#7-making-a-service-mesh-using-istio)
 - [8. Implementing Monitoring to our containerized application](#8-implementing-monitoring-to-our-containerized-application)
@@ -282,7 +288,7 @@ cd user_api
 And then just built the image !
 
 ```bash
-docker build -t macbucheron/user_api .
+docker build -t user_api .
 ```
 
 ### Running the Docker image
@@ -385,12 +391,65 @@ We also implemented persistent storage for the Redis database. The data is store
 
 ## 6. Making docker orchestration using Kubernetes
 
+In this part we will use Kubernetes to orchestrate our containers. We will use the [user_api](./user_api/) folder to deploy the User API on Kubernetes. We will also need to deploy a Redis server. All the file for this par are located in the [kubernetes](./kubernetes/) directory.
+
+### Prerequisites
+
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) installed
+- [minikube](https://minikube.sigs.k8s.io/docs/start/) installed
+
+### 1. Deploying
+
+To deploy our API on Kubernetes, we have created two deployment files:
+
+#### [user-api deployment.yaml](./kubernetes/user_api_deployment.yaml)
+
+This file is responsible for deploying the User API. It uses the Docker image we have created in the previous part. 
+
+We start by using an [init container]() to wait for the Redis server to be ready. 
+
+Since we developa health check for the User API, we can use it to check if the API is ready.
+We have used a [liveness probe]() to check if the API is still running. If the API is not running, Kubernetes will restart the pod.
+
+#### [redis deployment.yaml](./kubernetes/redis_deployment.yaml)
+
+This file is responsible for deploying the Redis server. We use the official Redis image from Docker Hub.
+To make the Redis server persistent, we have added a [volume](https://kubernetes.io/docs/concepts/storage/volumes/) to store the data. More info in [3. Use persistent storage](#3-use-persistent-storage)
+
+
+### 2. Exposing the service
+
+To expose the User API, we have created a [service](https://kubernetes.io/docs/concepts/services-networking/service/) in the [user-api service.yaml](./kubernetes/user_api_service.yaml) file. This service will expose the User API on the port 3000. We used a [LoadBalancer](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service to expose the User API to the outside world.
+
+For the Redis server, we have created a [service](https://kubernetes.io/docs/concepts/services-networking/service/) in the [redis service.yaml](./kubernetes/redis_service.yaml) file. This service will expose the Redis server on the port 6379.
+
+### 3. Use persistent storage
+
+To make the Redis server persistent, we have added a [volume](https://kubernetes.io/docs/concepts/storage/volumes/) to store the data. We have created a [PersistentVolume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) in [redis-pv.yaml](./kubernetes/redis/redis-pv.yaml) and a [PersistentVolumeClaim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims) in [redis-pvc.yaml](./kubernetes/redis/redis-pvc.yaml) file.
+
+### 4. Usage
+
+To deploy the User API you simply run [launch.sh](./kubernetes/launch.sh) script:
+  
+  ```bash
+  cd kubernetes
+  ./launch.sh
+  ```
+
+### 5. Delete
+
+To delete the deployment you simply run :
+
+  ```bash
+  cd kubernetes
+  minikube delete
+  ```
+
 ## 7. Making a service mesh using Istio
 
 ## 8. Implementing Monitoring to our containerized application
 
 ## To ask
 
-- Do you expect us the readme to be more like a walkthrough or a formal documentation ?
 
 ## To do

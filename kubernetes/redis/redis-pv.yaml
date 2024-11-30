@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-pv  # Name of the PersistentVolume
+  labels:
+    type: local  # Label to categorize the PV
+spec:
+  capacity:
+    storage: 1Gi  # Storage capacity
+  accessModes:
+    - ReadWriteOnce  # Access mode
+  persistentVolumeReclaimPolicy: Retain  # Reclaim policy after release
+  hostPath:
+    path: "/mnt/data"  # Path on the host machine where data is stored

@@ -41,7 +41,6 @@
 - [7. Making a service mesh using Istio](#7-making-a-service-mesh-using-istio)
 - [8. Implementing Monitoring to our containerized application](#8-implementing-monitoring-to-our-containerized-application)
 
-
 ## Description
 
 This is the repository for the Devops project at ECE Paris
@@ -57,15 +56,17 @@ Follow this step to install the project localy:
 
 1. Clone the repository:
 
-    HTTP:
-    ```bash
-    git clone https://github.com/Macbucheron1/devops_project.git
-    ```
-    SSH:
-    ```bash
-    git clone git@github.com:Macbucheron1/devops_project.git
-    ```
+   HTTP:
 
+   ```bash
+   git clone https://github.com/Macbucheron1/devops_project.git
+   ```
+
+   SSH:
+
+   ```bash
+   git clone git@github.com:Macbucheron1/devops_project.git
+   ```
 
 You are now ready to use the project.
 
@@ -105,7 +106,7 @@ One of the Goal of the CI pipeline is to make sure that the code is working on m
 
 ![CI_UserApi_Windows](./images/CI_CD/FailedWindowsCI.png)
 
-The job failed on Windows because we are using Redis. Redis is not available on Windows ! 
+The job failed on Windows because we are using Redis. Redis is not available on Windows !
 
 We have to remove the Windows job to have a successful run on all OS. Therefore our final CI pipeline is only running on MacOS and Linux.
 
@@ -138,9 +139,9 @@ In the lab correction, zipping the entire repository might have been simpler for
 #### The setup
 
 > [!IMPORTANT]
-> In order to make the api working online, we have use Azure Cache for Redis. To keep our project clean we have separated in the code for the [User API using local Redis](./user_api/README.md) from [User API for Azure](./user_api_Azure/README.md). We also added another workflow, separating the [CI pipeline using Redis Localy](./.github/workflows/CI_User_Api.yaml) from the [CI/CD pipeline for Azure](./.github/workflows/CI_CD_User_Api_Azure.yml) file. 
+> In order to make the api working online, we have use Azure Cache for Redis. To keep our project clean we have separated in the code for the [User API using local Redis](./user_api/README.md) from [User API for Azure](./user_api_Azure/README.md). We also added another workflow, separating the [CI pipeline using Redis Localy](./.github/workflows/CI_User_Api.yaml) from the [CI/CD pipeline for Azure](./.github/workflows/CI_CD_User_Api_Azure.yml) file.
 
-For the CD pipeline, we have decided to use Azure Web App. We have created a Web App and a Service Plan on Azure. We have also created a secret in the Github repository to store the Azure credentials. 
+For the CD pipeline, we have decided to use Azure Web App. We have created a Web App and a Service Plan on Azure. We have also created a secret in the Github repository to store the Azure credentials.
 
 ![Web App](./images/CI_CD/WebApp.png)
 
@@ -184,7 +185,6 @@ Furtheremore we can also delete the installation of Redis. Indeed, since we are 
 
 You can access the User API on Azure **[Right here](https://https://userapi-mac-xeroxx-d9dwg5g4a2hgd2f6.francecentral-01.azurewebsites.net/)**
 
-
 ## 3. Configuring and provisioning a virtual environment and run our application using the IaC approach
 
 The goal of this part is to create a virtual machine using the IaC approach. We have decided to use [Vagrant](https://www.vagrantup.com/) to create the virtual machine.
@@ -193,8 +193,9 @@ Then we will use [Ansible](https://www.ansible.com/) to provision the virtual ma
 ### Alocating the Virtual Machine
 
 We have created a [Vagrantfile](./InfrastructureAsCode/Vagrantfile) in the [InfrastructureAsCode](./InfrastructureAsCode/) directory. This file will create a virtual machine with the following specification:
+
 - OS: [Ubuntu](https://portal.cloud.hashicorp.com/vagrant/discover/ubuntu/jammy64)
-  > We chose Ubuntu, we wanted to change what we used in the previous labs in order to get better understanding of vagrant 
+  > We chose Ubuntu, we wanted to change what we used in the previous labs in order to get better understanding of vagrant
 - RAM: 2048 MB
 - CPU: 1
 - Forwarded port: 3000 -> 3000
@@ -204,6 +205,7 @@ We have created a [Vagrantfile](./InfrastructureAsCode/Vagrantfile) in the [Infr
 
 We have created an [Ansible playbook](./InfrastructureAsCode/playbooks/run.yml) in the [playbooks](./InfrastructureAsCode/playbooks/) directory.
 This playbook run the following roles/tasks:
+
 - [Install](./InfrastructureAsCode/playbooks/roles/install/tasks/main.yml)
   - Update the package list
   - Install Node.js
@@ -228,29 +230,29 @@ npm start
 To use the virtual machine, you have to run the following command:
 
 > [!Important]
-> You will need to have [Vagrant](https://developer.hashicorp.com/vagrant/install) and [Virtual box](https://www.virtualbox.org/wiki/Downloads)installed on your machine to do this part. 
+> You will need to have [Vagrant](https://developer.hashicorp.com/vagrant/install) and [Virtual box](https://www.virtualbox.org/wiki/Downloads)installed on your machine to do this part.
 
 1. Move to the [InfrastructureAsCode](./InfrastructureAsCode/) directory:
 
-    ```bash
-    cd InfrastructureAsCode
-    ```
+   ```bash
+   cd InfrastructureAsCode
+   ```
 
 2. Start the virtual machine:
 
-    ```bash
-    vagrant up
-    ```
+   ```bash
+   vagrant up
+   ```
 
 3. In your host machine, you can now access the User API at [http://localhost:3000](http://localhost:3000) or use `curl` to check that the API is running:
-  
-    ```bash
-    curl http://localhost:3000/health
-    ```
 
-> [!CAUTION] 
+   ```bash
+   curl http://localhost:3000/health
+   ```
+
+> [!CAUTION]
 > Sometimes you can get error when testing the API because of some process running on the port 3000. If you get an error, you can run the following command to kill the process: `kill -9 $(lsof -ti:3000)`
-    
+
 ### Demonstration
 
 Let's start the virtual machine:
@@ -286,7 +288,7 @@ Certain file are useless to the docker image. We added them to the [.dockerignor
 
 ### Building the Docker image
 
-Go to the  `user_api` folder
+Go to the `user_api` folder
 
 ```bash
 cd user_api
@@ -301,12 +303,13 @@ docker build -t user_api .
 ### Running the Docker image
 
 To use the docker image use the following command :
- 
+
 ```bash
 docker run -p 12345:3000 -d user_api
 ```
 
 or to use the image available on the Dockerhub:
+
 ```bash
 docker run -p 12345:3000 -d macbucheron/user_api
 ```
@@ -324,26 +327,28 @@ It is quite simple to publish a Docker image on Docker Hub. We just have to foll
 
 1. Login to Docker Hub:
 
-    ```bash
-    docker login
-    ```
-    You will be asked to enter your Docker Hub credentials.
+   ```bash
+   docker login
+   ```
+
+   You will be asked to enter your Docker Hub credentials.
 
 > [!WARNING]
 > Make that the tag follow the right typologie
->```bash
->docker tag current_tag macbucheron/user_api:latest
->```
-  
+>
+> ```bash
+> docker tag current_tag macbucheron/user_api:latest
+> ```
+
 2. Push the image to Docker Hub:
 
-    ```bash
-    docker push macbucheron/user_api:latest
-    ```
+   ```bash
+   docker push macbucheron/user_api:latest
+   ```
 
-#### Using Github Actions 
+#### Using Github Actions
 
-We can automate the process of building and publishing the Docker image using Github Actions. We created a new [workflow](.github/workflows/CI_DockerHub_Publisher_User_Api.yml). In this worklow we use a CI pipeline and then we push to the docker hub. 
+We can automate the process of building and publishing the Docker image using Github Actions. We created a new [workflow](.github/workflows/CI_DockerHub_Publisher_User_Api.yml). In this worklow we use a CI pipeline and then we push to the docker hub.
 
 Here is what the [github worklow](https://github.com/Macbucheron1/devops_project/actions/workflows/CI_DockerHub_Publisher_User_Api.yml) looks like
 
@@ -355,7 +360,7 @@ Because we use [docker/setup-buildx-action@v3](https://github.com/docker/setup-b
 
 > [!TIP]
 > We could have make only one worklow using the one we have created for Azure.
-> It would have look like this : 
+> It would have look like this :
 > ![united workflow](./images/docker/gitFlowUnited.png)
 > For clarity purpose we have decided to split them
 
@@ -364,11 +369,12 @@ The image is now available on the Docker Hub :
 
 ## 5. Making container orchestration using Docker Compose
 
-In order to use our application we need two services : 
-- Redis 
+In order to use our application we need two services :
+
+- Redis
 - user_api
 
-We have already created a Docker image for [user_api](./user_api/Dockerfile). We can just pull the latest image of redis in the docker compose file. 
+We have already created a Docker image for [user_api](./user_api/Dockerfile). We can just pull the latest image of redis in the docker compose file.
 
 The final result can be seen in the [docker-compose.yml](./docker-compose.yml) file.
 
@@ -411,9 +417,9 @@ To deploy our API on Kubernetes, we have created two deployment files:
 
 #### [user-api deployment.yaml](./kubernetes/user_api_deployment.yaml)
 
-This file is responsible for deploying the User API. It uses the Docker image we have created in the previous part. 
+This file is responsible for deploying the User API. It uses the Docker image we have created in the previous part.
 
-We start by using an [init container]() to wait for the Redis server to be ready. 
+We start by using an [init container]() to wait for the Redis server to be ready.
 
 Since we developa health check for the User API, we can use it to check if the API is ready.
 We have used a [liveness probe]() to check if the API is still running. If the API is not running, Kubernetes will restart the pod.
@@ -422,7 +428,6 @@ We have used a [liveness probe]() to check if the API is still running. If the A
 
 This file is responsible for deploying the Redis server. We use the official Redis image from Docker Hub.
 To make the Redis server persistent, we have added a [volume](https://kubernetes.io/docs/concepts/storage/volumes/) to store the data. More info in [3. Use persistent storage](#3-use-persistent-storage)
-
 
 ### 2. Exposing the service
 
@@ -437,26 +442,26 @@ To make the Redis server persistent, we have added a [volume](https://kubernetes
 ### 4. Usage
 
 To deploy the User API you simply run [launch.sh](./kubernetes/launch.sh) script:
-  
-  ```bash
-  cd kubernetes
-  ./launch.sh
-  ```
+
+```bash
+cd kubernetes
+./launch.sh
+```
 
 ### 5. Delete
 
 To delete the deployment you simply run :
 
-  ```bash
-  cd kubernetes
-  minikube delete
-  ```
+```bash
+cd kubernetes
+minikube delete
+```
 
 ## 7. Making a service mesh using Istio
 
 ## 8. Implementing Monitoring to our containerized application
 
-## To ask
-
-
 ## To do
+
+- [ ] add the part about Istio in the readme
+- [ ] Do the monitoring part

@@ -45,6 +45,11 @@ kubectl apply -f user-api/deployment.yaml
 kubectl apply -f user-api/service-istio.yaml
 kubectl apply -f user-api-azure/deployment.yaml
 
+# Deploy Istio Gateway and VirtualService and DestinationRule
+kubectl apply -f user-api/gateway.yaml
+kubectl apply -f user-api/virtual-service.yaml
+kubectl apply -f user-api/destination-rule.yaml
+
 # Wait for Redis Deployment to be ready
 echo "Waiting for Redis Deployment to become ready..."
 kubectl rollout status deployment/redis-deployment
@@ -53,7 +58,39 @@ kubectl rollout status deployment/redis-deployment
 echo "Waiting for User API Deployment to become ready..."
 kubectl rollout status deployment/user-api-deployment
 
-# Open User API Service URL
-minikube service user-api-service
+# Start minikube tunnel in the background
+echo "Starting minikube tunnel..."
+minikube tunnel &
+
+MAX_RETRIES=10
+RETRY=0
+while [ -z "$INGRESS_IP" ] && [ $RETRY -lt $MAX_RETRIES ]; do
+  echo "Retrying to get Istio Ingress Gateway IP..."
+  sleep 5
+  INGRESS_IP=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  RETRY=$((RETRY + 1))
+done
+
+# Mettre à jour le fichier hosts en écrasant toute entrée existante pour user-api.local
+# Supprimer toute ligne existante contenant 'user-api.local'
+sudo sed -i.bak '/user-api-service\.local/d' /etc/hosts
+# Ajouter la nouvelle entrée
+echo "$INGRESS_IP user-api-service.local" | sudo tee -a /etc/hosts > /dev/null
+
+
+# Vérifier si l'IP est obtenue
+if [ -z "$INGRESS_IP" ]; then
+  echo "Unable to obtain Istio Ingress Gateway IP. Exiting..."
+  exit 1
+else
+  echo "Istio Ingress Gateway IP: $INGRESS_IP"
+fi
+
+
+
+
+# Ouvrir le navigateur avec l'URL appropriée
+echo "Opening browser to http://user-api-service.local"
+open http://user-api-service.local
 
 echo "Deployment completed successfully!"

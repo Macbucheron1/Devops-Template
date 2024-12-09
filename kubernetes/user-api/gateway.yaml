@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: user-api-gateway
+spec:
+  selector:
+    istio: ingressgateway  # utilise l'ingressgateway par défaut d'Istio
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "user-api-service.local"  # Host virtuel que nous utiliserons pour accéder à l'application

@@ -4,7 +4,9 @@ metadata:
   name: user-api
 spec:
   hosts:
-    - user-api-service
+    - "user-api-service.local"
+  gateways:
+    - user-api-gateway
   http:
     - route:
       - destination:

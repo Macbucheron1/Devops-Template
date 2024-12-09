@@ -2,15 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user-api-deployment
+  labels:
+    app: user-api
+    version: v1
 spec:
   replicas: 1  # Number of desired pod replicas
   selector:
     matchLabels:
       app: user-api
+      version: v1
   template:
     metadata:
       labels:
         app: user-api
+        version: v1
     spec:
       initContainers:
         - name: wait-for-redis

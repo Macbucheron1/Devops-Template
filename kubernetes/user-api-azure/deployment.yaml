@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-api-deployment-azure
+  labels:
+    app: user-api-azure
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-api
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: user-api
+        version: v2
+    spec:
+      containers:
+        - name: user-api-azure
+          image: macbucheron/user_api_azure # L'image qui utilise Redis sur Azure
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REDIS_HOST
+              value: "UserApiRedis.redis.cache.windows.net"
+            - name: REDIS_PORT
+              value: "6380"
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secret
+                  key: REDIS_PASSWORD

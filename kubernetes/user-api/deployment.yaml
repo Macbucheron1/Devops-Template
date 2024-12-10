@@ -6,7 +6,7 @@ metadata:
     app: user-api
     version: v1
 spec:
-  replicas: 1  # Number of desired pod replicas
+  replicas: 1 # Number of desired pod replicas
   selector:
     matchLabels:
       app: user-api
@@ -20,31 +20,30 @@ spec:
       initContainers:
         - name: wait-for-redis
           image: busybox
-          command:
-            [
+          command: [
               "sh",
               "-c",
               'until nc -z redis-service 6379; do echo "Waiting for Redis..."; sleep 2; done; echo "Redis is up!"',
-            ]  # Wait for Redis service before starting the main container
+            ] # Wait for Redis service before starting the main container
       containers:
         - name: user-api
           image: macbucheron/user_api
           ports:
-            - containerPort: 3000  # Expose port 3000 in the container
+            - containerPort: 3000 # Expose port 3000 in the container
           env:
             - name: REDIS_HOST
-              value: "redis-service"  # Redis service hostname
+              value: "redis-service" # Redis service hostname
             - name: REDIS_PORT
-              value: "6379"  # Redis service port
+              value: "6379" # Redis service port
           livenessProbe:
             httpGet:
-              path: /health  # Liveness probe endpoint
+              path: /health # Liveness probe endpoint
               port: 3000
-            initialDelaySeconds: 30  # Delay before starting liveness probes
-            periodSeconds: 10  # Interval between liveness probes
+            initialDelaySeconds: 30 # Delay before starting liveness probes
+            periodSeconds: 10 # Interval between liveness probes
           readinessProbe:
             httpGet:
-              path: /health  # Readiness probe endpoint
+              path: /health # Readiness probe endpoint
               port: 3000
-            initialDelaySeconds: 5  # Delay before starting readiness probes
-            periodSeconds: 10  # Interval between readiness probes
+            initialDelaySeconds: 5 # Delay before starting readiness probes
+            periodSeconds: 10 # Interval between readiness probes

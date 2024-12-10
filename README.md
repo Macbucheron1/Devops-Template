@@ -459,6 +459,36 @@ minikube delete
 
 ## 7. Making a service mesh using Istio
 
+> [!CAUTION]
+> Make sur you have the following prerequisites:
+> - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) installed
+> - [minikube](https://minikube.sigs.k8s.io/docs/start/) installed
+
+> [!IMPORTANT]
+> If you wish to test quickly this part simply use the [launch_istio.sh](./kubernetes/launch_istio.sh) script
+
+### Deploy the application using istio
+
+To deploy the application using Istio, we have created a [istio](./istio/) directory. This directory contains the Istioctl commands to deploy the application.
+To use it we have to add Istioctl to the path. You can do it by running the following command:
+
+```bash
+export PATH=$PWD/istio/bin:$PATH
+```
+
+Then we need to install Istio on the cluster and enable the automatic sidecar injection:
+
+```bash
+istioctl install --set profile=demo -y
+kubectl label namespace default istio-injection=enabled
+```
+
+To simply deploy an application using Istio wont be really usefull. The real power of Istio is to manage the traffic between the different services. Let's jump into route request and trafic shifting.
+
+### Route request and trafic shifting
+
+
+
 ## 8. Implementing Monitoring to our containerized application
 
 ## To do

@@ -40,12 +40,12 @@ kubectl apply -f redis/redis-pvc.yaml
 kubectl apply -f redis/deployment.yaml
 kubectl apply -f redis/service.yaml
 
-# Deploy User API components
+# Deploy application components
 kubectl apply -f user-api/deployment.yaml
 kubectl apply -f user-api/service-istio.yaml
 kubectl apply -f user-api-azure/deployment.yaml
 
-# Deploy Istio Gateway and VirtualService and DestinationRule
+# Deploy Istio configurations
 kubectl apply -f user-api/gateway.yaml
 kubectl apply -f user-api/virtual-service.yaml
 kubectl apply -f user-api/destination-rule.yaml

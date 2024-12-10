@@ -9,11 +9,11 @@ spec:
     - user-api-gateway
   http:
     - route:
-      - destination:
-          host: user-api-service
-          subset: v1
-        weight: 50
-      - destination:
-          host: user-api-service
-          subset: v2
-        weight: 50
+        - destination:
+            host: user-api-service
+            subset: v1
+          weight: 50
+        - destination:
+            host: user-api-service
+            subset: v2
+          weight: 50

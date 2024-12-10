@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: user-api-azure
-          image: macbucheron/user_api_azure # L'image qui utilise Redis sur Azure
+          image: macbucheron/user_api_azure
           ports:
             - containerPort: 3000
           env:

@@ -417,17 +417,21 @@ To deploy our API on Kubernetes, we have created two deployment files:
 
 #### [user-api deployment.yaml](./kubernetes/user_api_deployment.yaml)
 
-This file is responsible for deploying the User API. It uses the Docker image we have created in the previous part.
-
-We start by using an [init container]() to wait for the Redis server to be ready.
-
-Since we developa health check for the User API, we can use it to check if the API is ready.
-We have used a [liveness probe]() to check if the API is still running. If the API is not running, Kubernetes will restart the pod.
+   - Defines a Kubernetes Deployment for the `user-api` application.
+   - Specifies that one replica of the pod should be running.
+   - Includes an init container that waits for a Redis service to be available before starting the main container.
+   - The main container runs the `user-api` application and exposes port 3000.
+   - Includes liveness and readiness probes to monitor the health of the application.
 
 #### [redis deployment.yaml](./kubernetes/redis_deployment.yaml)
 
-This file is responsible for deploying the Redis server. We use the official Redis image from Docker Hub.
-To make the Redis server persistent, we have added a [volume](https://kubernetes.io/docs/concepts/storage/volumes/) to store the data. More info in [3. Use persistent storage](#3-use-persistent-storage)
+- Defines a Deployment for Redis.
+- Specifies 1 replica of the Redis pod.
+- Uses the Redis image version `6.2.6`.
+- Mounts a volume named `redis-storage` at `/data`.
+- Exposes port 6379.
+- Configures liveness and readiness probes on port 6379.
+- References a PersistentVolumeClaim named `redis-pvc` for storage.
 
 ### 2. Exposing the service
 
@@ -487,7 +491,25 @@ To simply deploy an application using Istio wont be really usefull. The real pow
 
 ### Route request and trafic shifting
 
+In order to created route request and trafic shifting we have create different file
 
+- [service-istio](./kubernetes/user-api/service-istio.yaml)
+   - Defines a Kubernetes Service for the `user-api` application.
+   - The service is of type `ClusterIP`, which means it is only accessible within the cluster.
+   - It listens on port 3000 and forwards traffic to the same port on the target pods.
+
+- [gateway](./kubernetes/user-api/gateway.yaml)
+   - Defines an Istio Gateway to manage inbound traffic to the `user-api` service.
+   - Specifies that the gateway listens on port 80 for HTTP traffic.
+   - Routes traffic to hosts matching `user-api-service.local`.
+
+- [destination-rule](./kubernetes/user-api/destination-rule.yaml)
+   - Defines an Istio Destination Rule to configure policies for traffic to the `user-api` service.
+   - Specifies two subsets (`v1` and `v2`) based on the version labels.
+   - These subsets are used in the Virtual Service to route traffic to different versions of the `user-api` service.
+
+
+### 
 
 ## 8. Implementing Monitoring to our containerized application
 

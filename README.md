@@ -553,6 +553,16 @@ The application is now on our web browser. We can see that the trafic is split b
 ![Istio_demo_web1](./images/k8s/Istio_demo_web1.png)
 ![Istio_demo_web2](./images/k8s/Istio_demo_web2.png)
 
+### Clean-up
+
+To clean up the Istio deployment, you can run the following command:
+
+```bash
+minikube delete
+```
+
+and it will simply delete the minikube cluster with all the deployment.
+
 ## To do
 
 - [x] add the part about Istio in the readme

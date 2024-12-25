@@ -487,16 +487,24 @@ istioctl install --set profile=demo -y
 kubectl label namespace default istio-injection=enabled
 ```
 
+We have created a special service for the istio version in the [service-istio](./kubernetes/user-api/service-istio.yaml) file. 
+
+To deploy the application we next need to apply the following files:
+
+- [service-istio](./kubernetes/user-api/service-istio.yaml)
+   - Defines a Kubernetes Service for the `user-api` application.
+   - The service is of type `ClusterIP`, which means it is only accessible within the cluster.
+   - It listens on port 3000 and forwards traffic to the same port on the target pods.
+
+- [deployment](./kubernetes/user-api/deployment.yaml)
+    - Same as before
+
 To simply deploy an application using Istio wont be really usefull. The real power of Istio is to manage the traffic between the different services. Let's jump into route request and trafic shifting.
 
 ### Route request and trafic shifting
 
 In order to created route request and trafic shifting we have create different file
 
-- [service-istio](./kubernetes/user-api/service-istio.yaml)
-   - Defines a Kubernetes Service for the `user-api` application.
-   - The service is of type `ClusterIP`, which means it is only accessible within the cluster.
-   - It listens on port 3000 and forwards traffic to the same port on the target pods.
 
 - [gateway](./kubernetes/user-api/gateway.yaml)
    - Defines an Istio Gateway to manage inbound traffic to the `user-api` service.
@@ -508,12 +516,16 @@ In order to created route request and trafic shifting we have create different f
    - Specifies two subsets (`v1` and `v2`) based on the version labels.
    - These subsets are used in the Virtual Service to route traffic to different versions of the `user-api` service.
 
-
+- [virtual-service](./kubernetes/user-api/virtual-service.yaml)
+   - Defines an Istio VirtualService to route traffic to the `user-api` service.
+   - Specifies that traffic to `user-api-service.local` should be routed through the `user-api-gateway`.
+   - Splits traffic between two subsets (`v1` and `v2`) of the `user-api-service`, each receiving 50% of the traffic.
+  
 ### 
 
 ## 8. Implementing Monitoring to our containerized application
 
 ## To do
 
-- [ ] add the part about Istio in the readme
+- [x] add the part about Istio in the readme
 - [ ] Do the monitoring part

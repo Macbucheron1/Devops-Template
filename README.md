@@ -31,15 +31,17 @@
 - [5. Making container orchestration using Docker Compose](#5-making-container-orchestration-using-docker-compose)
 - [6. Making docker orchestration using Kubernetes](#6-making-docker-orchestration-using-kubernetes)
   - [Prerequisites](#prerequisites)
-  - [1. Deploying](#1-deploying)
+  - [Deploying](#1-deploying)
     - [user-api deployment.yaml](#user-api-deploymentyaml)
     - [redis deployment.yaml](#redis-deploymentyaml)
-  - [2. Exposing the service](#2-exposing-the-service)
-  - [3. Use persistent storage](#3-use-persistent-storage)
-  - [4. Usage](#4-usage)
-  - [5. Delete](#5-delete)
+  - [Exposing the service](#2-exposing-the-service)
+  - [Use persistent storage](#3-use-persistent-storage)
+  - [Usage](#4-usage)
+  - [Delete](#5-delete)
 - [7. Making a service mesh using Istio](#7-making-a-service-mesh-using-istio)
-- [8. Implementing Monitoring to our containerized application](#8-implementing-monitoring-to-our-containerized-application)
+  - [Deploy the application using istio](#deploy-the-application-using-istio)
+  - [Route request and trafic shifting](#route-request-and-trafic-shifting)
+  - [Demonstration](#istio-demonstration)
 
 ## Description
 
@@ -411,7 +413,7 @@ In this part we will use Kubernetes to orchestrate our containers. We will use t
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) installed
 - [minikube](https://minikube.sigs.k8s.io/docs/start/) installed
 
-### 1. Deploying
+### Deploying
 
 To deploy our API on Kubernetes, we have created two deployment files:
 
@@ -433,17 +435,17 @@ To deploy our API on Kubernetes, we have created two deployment files:
 - Configures liveness and readiness probes on port 6379.
 - References a PersistentVolumeClaim named `redis-pvc` for storage.
 
-### 2. Exposing the service
+### Exposing the service
 
 To expose the User API, we have created a [service](https://kubernetes.io/docs/concepts/services-networking/service/) in the [user-api service.yaml](./kubernetes/user_api_service.yaml) file. This service will expose the User API on the port 3000. We used a [LoadBalancer](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service to expose the User API to the outside world.
 
 For the Redis server, we have created a [service](https://kubernetes.io/docs/concepts/services-networking/service/) in the [redis service.yaml](./kubernetes/redis_service.yaml) file. This service will expose the Redis server on the port 6379.
 
-### 3. Use persistent storage
+### Use persistent storage
 
 To make the Redis server persistent, we have added a [volume](https://kubernetes.io/docs/concepts/storage/volumes/) to store the data. We have created a [PersistentVolume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) in [redis-pv.yaml](./kubernetes/redis/redis-pv.yaml) and a [PersistentVolumeClaim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims) in [redis-pvc.yaml](./kubernetes/redis/redis-pvc.yaml) file.
 
-### 4. Usage
+### Usage
 
 To deploy the User API you simply run [launch.sh](./kubernetes/launch.sh) script:
 
@@ -452,7 +454,7 @@ cd kubernetes
 ./launch.sh
 ```
 
-### 5. Delete
+### Delete
 
 To delete the deployment you simply run :
 
@@ -528,9 +530,12 @@ kubectl apply -f user-api/destination-rule.yaml
 kubectl apply -f user-api/virtual-service.yaml
 ```
   
-### Demonstration
+### Istio Demonstration
 
 To demonstrate the use of Istio we have created a [launch_istio.sh](./kubernetes/launch_istio.sh) script. This script will deploy the application using Istio and then apply the route request and trafic shifting.
+
+> [!CAUTION]
+> Make sur you have delete minikube before running the script with the following command: `minikube delete`
 
 let's run the script:
 
@@ -547,8 +552,6 @@ The application is now on our web browser. We can see that the trafic is split b
 
 ![Istio_demo_web1](./images/k8s/Istio_demo_web1.png)
 ![Istio_demo_web2](./images/k8s/Istio_demo_web2.png)
-
-## 8. Implementing Monitoring to our containerized application
 
 ## To do
 

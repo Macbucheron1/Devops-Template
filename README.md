@@ -505,7 +505,6 @@ To simply deploy an application using Istio wont be really usefull. The real pow
 
 In order to created route request and trafic shifting we have create different file
 
-
 - [gateway](./kubernetes/user-api/gateway.yaml)
    - Defines an Istio Gateway to manage inbound traffic to the `user-api` service.
    - Specifies that the gateway listens on port 80 for HTTP traffic.
@@ -520,8 +519,34 @@ In order to created route request and trafic shifting we have create different f
    - Defines an Istio VirtualService to route traffic to the `user-api` service.
    - Specifies that traffic to `user-api-service.local` should be routed through the `user-api-gateway`.
    - Splits traffic between two subsets (`v1` and `v2`) of the `user-api-service`, each receiving 50% of the traffic.
+
+To use all of this we have to apply the following files:
+
+```bash
+kubectl apply -f user-api/gateway.yaml
+kubectl apply -f user-api/destination-rule.yaml
+kubectl apply -f user-api/virtual-service.yaml
+```
   
-### 
+### Demonstration
+
+To demonstrate the use of Istio we have created a [launch_istio.sh](./kubernetes/launch_istio.sh) script. This script will deploy the application using Istio and then apply the route request and trafic shifting.
+
+let's run the script:
+
+```bash 
+cd kubernetes
+sudo ./launch_istio.sh
+```
+
+And we have the following result:
+
+![Istio_demo](./images/k8s/Istio_demo.png)
+
+The application is now on our web browser. We can see that the trafic is split between the two version of the User API by refreshing the page.
+
+![Istio_demo_web1](./images/k8s/Istio_demo_web1.png)
+![Istio_demo_web2](./images/k8s/Istio_demo_web2.png)
 
 ## 8. Implementing Monitoring to our containerized application
 

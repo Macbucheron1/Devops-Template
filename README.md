@@ -74,12 +74,24 @@ You are now ready to use the project.
 
 ## 1. Create a Web Application
 
-Find all of the information in the [User API folder](./user_api/README.md). A link to come back to this page is available at the end of the README.
+> [!Important]
+> Find all of the information in the [User API folder](./user_api/README.md). A link to come back to this page is available at the end of the README.
+
+The goal of this section is to create an API and to cover it with test. 
+Since the project is more about devops tools than the code itself, we have decided to keep this part simple and simply use the API made during [Lab 4](https://github.com/adaltas/ece-devops-2024-fall/blob/main/modules/04.continuous-testing/lab.md)
+
+The API is a simple CRUD API that manage users. It is made with Node.js and Express. We are using Redis as a database.
+We have made some test for the API using [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/).
+
+| Subject                                                         |   Code    | Max. grade| Done |
+|:----------------------------------------------------------------|:---------:|:---------:| ---- |
+| Enriched web application with automated tests                   |   APP     |    +2     |  ✅  |
+| **Bonus**                                                       |           |           |      |
+| Swagger Integration                                             |           |           |  ✅  |
 
 ## 2. Apply CI/CD pipeline
 
 ### CI
-
 CI stand for Continuous Integration. It is a practice in software engineering where the code is automatically tested and checked every time a developer pushes code to the repository. The goal is to find and address bugs and errors as soon as possible.
 
 #### The steps
@@ -93,8 +105,8 @@ We have made our CI pipeline using Github Action. It is triggered on every push 
 5. Install dependencies
 6. Run Linter to check the code
 
-   > [!NOTE]
-   > Linter is a tool that analyze the code to find errors and bugs. It also enforce a coding style. In our case we are using ESLint. You can find the configuration in the [.eslintrc.json](./user_api/.eslintrc.json) file.
+> [!NOTE]
+> Linter is a tool that analyze the code to find errors and bugs. It also enforce a coding style. In our case we are using ESLint. You can find the configuration in the [.eslintrc.json](./user_api/.eslintrc.json) file.
 
 7. Run the tests for the User API
 

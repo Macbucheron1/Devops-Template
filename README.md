@@ -131,7 +131,7 @@ Now here is the result of successful jobs on Linux and MacOS:
 > [!TIP]
 > We could have created a separeted job for the Windows runner and use a docker container with Redis to make it work. But we have decided to keep it simple for this project.
 
-_For the next parts we also jobs for the different Node.js version_
+_For the next parts we also added jobs for the different Node.js version_
 
 #### Choice justification
 
@@ -153,7 +153,7 @@ In the lab correction, zipping the entire repository might have been simpler for
 #### The setup
 
 > [!IMPORTANT]
-> In order to make the api working online, we have use Azure Cache for Redis. To keep our project clean we have separated in the code for the [User API using local Redis](./user_api/README.md) from [User API for Azure](./user_api_Azure/README.md). We also added another workflow, separating the [CI pipeline using Redis Localy](./.github/workflows/CI_User_Api.yaml) from the [CI/CD pipeline for Azure](./.github/workflows/CI_CD_User_Api_Azure.yml) file.
+> In order to make the api working online, we have use Azure Cache for Redis. To keep our project clean we have separated the code for the [User API using local Redis](./user_api/README.md) from the code for the [User API for Azure](./user_api_Azure/README.md). We also added another workflow, separating the [CI pipeline using Redis Localy](./.github/workflows/CI_User_Api.yaml) from the [CI/CD pipeline for Azure](./.github/workflows/CI_CD_User_Api_Azure.yml) file.
 
 For the CD pipeline, we have decided to use Azure Web App. We have created a Web App and a Service Plan on Azure. We have also created a secret in the Github repository to store the Azure credentials.
 

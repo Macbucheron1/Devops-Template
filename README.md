@@ -79,7 +79,7 @@ You are now ready to use the project.
 > [!Important]
 > Find all of the information in the [User API folder](./user_api/README.md). A link to come back to this page is available at the end of the README.
 
-The goal of this section is to create an API and to cover it with test. 
+The goal of this section is to create an API and cover it with test. 
 Since the project is more about devops tools than the code itself, we have decided to keep this part simple and simply use the API made during [Lab 4](https://github.com/adaltas/ece-devops-2024-fall/blob/main/modules/04.continuous-testing/lab.md)
 
 The API is a simple CRUD API that manage users. It is made with Node.js and Express. We are using Redis as a database.
@@ -188,7 +188,7 @@ _**27m 50s ? Why so much time for a simple CRUD api ?**_
 
 The pipeline is taking a long time to complete because we cannot use parallel jobs in our case. Since we are using Azure Cache for Redis, all the runner use the same database and not an independent redis server. Therefore, making parallel jobs would make the pipeline fail because of the database conflict.
 
-_**How to otpimize our pipeline to reduce this duration**_
+_**How to optimize our pipeline to reduce this duration**_
 
 First of all, one of the longest step is the upload artifact for deployment. By looking at our Web App specification, we can see that it uses Node JS 18. And since the web server is running on ubuntu-latest, we can only upload the artifact on the ubuntu-latest & Node Js 18 runner.
 
@@ -196,7 +196,7 @@ First of all, one of the longest step is the upload artifact for deployment. By 
 
 We can see that the CI/CD took much less time to complete.
 
-Furtheremore we can also delete the installation of Redis. Indeed, since we are using Azure Cache for Redis, our API is only connecting to this online database. We can remove the Redis installation and the Redis check from the [CI pipeline](./.github/workflows/CI_CD_User_Api_Azure.yml).
+Furthermore, we can also delete the installation of Redis. Indeed, since we are using Azure Cache for Redis, our API is only connecting to this online database. We can remove the Redis installation and the Redis check from the [CI pipeline](./.github/workflows/CI_CD_User_Api_Azure.yml).
 
 #### Access the User API on Azure
 
@@ -218,7 +218,7 @@ Other details about IaC can be found in the [Infrastructure as Code folder](./In
 - [Vagrant](https://www.vagrantup.com/)
 - [VirtualBox](https://www.virtualbox.org/)
 
-### Alocating the Virtual Machine
+### Allocating the Virtual Machine
 
 We have created a [Vagrantfile](./InfrastructureAsCode/Vagrantfile) in the [InfrastructureAsCode](./InfrastructureAsCode/) directory. This file will create a virtual machine with the following specification:
 
@@ -288,7 +288,7 @@ Let's start the virtual machine:
 ![iac_launch1](./images/iac/IAC_launch1.png)
 ![iac_launch2](./images/iac/IAC_launch2.png)
 
-Great ! The virtual machine is running and all the test have pasted. Now let's check that the User API is running:
+Great ! The virtual machine is running and all the tests have pasted. Now let's check that the User API is running:
 
 ![curlResult](./images/iac/curlResult_IAC.png)
 
@@ -472,7 +472,7 @@ The user should still be there.
 
 ## 6. Making docker orchestration using Kubernetes
 
-In this part we will use Kubernetes to orchestrate our containers. We will use the [user_api](./user_api/) folder to deploy the User API on Kubernetes. We will also need to deploy a Redis server. All the file for this par are located in the [kubernetes](./kubernetes/) directory.
+In this part we will use Kubernetes to orchestrate our containers. We will use the [user_api](./user_api/) folder to deploy the User API on Kubernetes. We will also need to deploy a Redis server. All the file for this part are located in the [kubernetes](./kubernetes/) directory.
 
 ### Prerequisites
 
@@ -513,7 +513,7 @@ To make the Redis server persistent, we have added a [volume](https://kubernetes
 
 ### Usage
 
-To deploy the User API you simply run [launch.sh](./kubernetes/launch.sh) script:
+To deploy the User API, simply run [launch.sh](./kubernetes/launch.sh) script:
 
 ```bash
 cd kubernetes

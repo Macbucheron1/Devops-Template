@@ -418,6 +418,18 @@ docker-compose down
 
 We also implemented persistent storage for the Redis database. The data is stored in the `db_data` volume. This way, the data is not lost when the container is stopped.
 
+To try it, create a user with the following command:
+
+```bash
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"username":"macbucheron","firstname":"Nathan","lastname":"Deprat"}' \
+  http://localhost:3000/user
+```
+
+then stop the docker compose and start it again. The user should still be there.
+
+
 ## 6. Making docker orchestration using Kubernetes
 
 In this part we will use Kubernetes to orchestrate our containers. We will use the [user_api](./user_api/) folder to deploy the User API on Kubernetes. We will also need to deploy a Redis server. All the file for this par are located in the [kubernetes](./kubernetes/) directory.

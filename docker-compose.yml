@@ -1,33 +1,15 @@
-# This is a Docker Compose file that defines the services and volumes
-#  
-# services: Defines the services to be run.
-# 
-# redis: A service that uses the official Redis image.
-#   image: Specifies the Docker image to use for the Redis service.
-#   volumes: Mounts the db_data volume to the /data directory in the Redis container.
-# 
-# userapi: A service that uses the macbucheron/user_api:latest image.
-#   image: Specifies the Docker image to use for the userapi service.
-#   ports: Maps port 3000 on the host to port 3000 in the container.
-#   environment: Sets environment variables for the userapi service.
-#     - REDIS_HOST: The hostname of the Redis service.
-#     - REDIS_PORT: The port number of the Redis service.
-# 
-# volumes: Defines the named volumes to be used.
-# 
-# db_data: A named volume used by the Redis service to persist data.
 
-services:
+services: # Defines the services to be run.
   redis:
     image: redis
-    volumes:
+    volumes: # Mounts the db_data volume to the /data directory in the Redis container.
       - db_data:/data
   userapi:
     image: macbucheron/user_api:latest
     ports:
-      - "3000:3000"
+      - "3000:3000" #  Maps port 3000 on the host to port 3000 in the container.
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
 volumes:
-  db_data: {}
+  db_data: {} # A named volume used by the Redis service to persist data.

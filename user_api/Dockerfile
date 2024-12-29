@@ -1,5 +1,5 @@
 
-# Use the official Node.js 18 image as the base image
+# Use the official Node.js  image as the base image
 FROM node:20
 
 # Set the working directory inside the container to /usr/src/app

@@ -17,20 +17,22 @@
     - d. [Pipeline duration Optimization](#pipeline-duration-optimization)
     - e. [Access the User API on Azure](#access-the-user-api-on-azure)
 - [3. Configuring and provisioning a virtual environment and run our application using the IaC approach](#3-configuring-and-provisioning-a-virtual-environment-and-run-our-application-using-the-iac-approach)
-  - I. [Alocating the Virtual Machine](#alocating-the-virtual-machine)
-  - II. [Provisioning the Virtual Machine](#provisioning-the-virtual-machine)
-  - III.[Usage](#usage)
-  - IV. [Demonstration](#demonstration)
-  - V. [Destroy or stop the virtual machine](#destroy-or-stop-the-virtual-machine)
+  - I. [Prerequisites](#prerequisites)
+  - II. [Alocating the Virtual Machine](#alocating-the-virtual-machine)
+  - III. [Provisioning the Virtual Machine](#provisioning-the-virtual-machine)
+  - IV.[Usage](#usage)
+  - V. [Demonstration](#demonstration)
+  - VI. [Destroy or stop the virtual machine](#destroy-or-stop-the-virtual-machine)
 - [4. Building Docker image of our application](#4-building-docker-image-of-our-application)
-  - I. [Building the Docker image](#building-the-docker-image)
-  - II. [Running the Docker image](#running-the-docker-image)
-  - III. [Publishing the Docker image](#publishing-the-docker-image)
+  - I. [Prerequisites](#prerequisites-1)
+  - II. [Building the Docker image](#building-the-docker-image)
+  - III. [Running the Docker image](#running-the-docker-image)
+  - IV. [Publishing the Docker image](#publishing-the-docker-image)
     - a. [Using Basic Docker push](#using-basic-docker-push)
     - b. [Using Github Actions](#using-github-actions)
 - [5. Making container orchestration using Docker Compose](#5-making-container-orchestration-using-docker-compose)
 - [6. Making docker orchestration using Kubernetes](#6-making-docker-orchestration-using-kubernetes)
-  - I. [Prerequisites](#prerequisites)
+  - I. [Prerequisites](#prerequisites-2)
   - II. [Deploying](#1-deploying)
     - a. [user-api deployment.yaml](#user-api-deploymentyaml)
     - b. [redis deployment.yaml](#redis-deploymentyaml)
@@ -87,7 +89,7 @@ We have made some test for the API using [Mocha](https://mochajs.org/) and [Chai
 |:----------------------------------------------------------------|:---------:|:---------:| ---- |
 | Enriched web application with automated tests                   |   APP     |    +2     |  ✅  |
 | **Bonus**                                                       |           |           |      |
-| Swagger Integration                                             |           |           |  ✅  |
+| Swagger Integration                                             |   BNS     |           |  ✅  |
 
 ## 2. Apply CI/CD pipeline
 
@@ -199,12 +201,21 @@ Furtheremore we can also delete the installation of Redis. Indeed, since we are 
 
 You can access the User API on Azure **[Right here](https://https://userapi-mac-xeroxx-d9dwg5g4a2hgd2f6.francecentral-01.azurewebsites.net/)**
 
+| Subject                                                         |   Code    | Max. grade| Done |
+|:----------------------------------------------------------------|:---------:|:---------:|:----:|
+| Continuous Integration and Continuous Delivery (and Deployment) |   CICD    |    +3     |  ✅  |
+
 ## 3. Configuring and provisioning a virtual environment and run our application using the IaC approach
 
 The goal of this part is to create a virtual machine using the IaC approach. We have decided to use [Vagrant](https://www.vagrantup.com/) to create the virtual machine.
 Then we will use [Ansible](https://www.ansible.com/) to provision the virtual machine and run our application.
 
 Other details about IaC can be found in the [Infrastructure as Code folder](./InfrastructureAsCode/README.md)
+
+### Prerequisites
+
+- [Vagrant](https://www.vagrantup.com/)
+- [VirtualBox](https://www.virtualbox.org/)
 
 ### Alocating the Virtual Machine
 
@@ -296,7 +307,17 @@ To destroy the virtual machine, you can run the following command:
 vagrant destroy
 ```
 
+
+| Subject                                                         |   Code    | Max. grade| Done |
+|:----------------------------------------------------------------|:---------:|:---------:|:----:|
+| Infrastructure as code using Ansible                            |   IAC     |    +3     |  ✅  |
+
+
 ## 4. Building Docker image of our application
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) installed
 
 To create a docker image we first need a [Docker File](./user_api/Dockerfile). This file is responsible for the creation of the image.
 
@@ -383,6 +404,12 @@ Because we use [docker/setup-buildx-action@v3](https://github.com/docker/setup-b
 The image is now available on the Docker Hub :
 ![Docker Hub](./images/docker/dockerHub.png)
 
+| Subject                                                         |   Code    | Max. grade| Done |
+|:----------------------------------------------------------------|:---------:|:---------:|:----:|
+| Containerisation with Docker                                    |   D       |    +2     |  ✅  |
+| **Bonus**                                                       |           |           |      |
+| CI job for automated build and publish to DockerHub             |   BNS     |           |  ✅  |
+
 ## 5. Making container orchestration using Docker Compose
 
 In order to use our application we need two services :
@@ -397,7 +424,7 @@ The final result can be seen in the [docker-compose.yml](./docker-compose.yml) f
 To run the docker compose file, you just have to run the following command:
 
 ```bash
-docker-compose up
+docker comopse up
 ```
 
 Here is the result of the command:
@@ -428,6 +455,10 @@ curl --header "Content-Type: application/json" \
 ```
 
 then stop the docker compose and start it again. The user should still be there.
+
+| Subject                                                         |   Code    | Max. grade| Done |
+|:----------------------------------------------------------------|:---------:|:---------:|:----:|
+| Orchestration with Docker Compose                               |   DC      |    +2     |  ✅  |
 
 
 ## 6. Making docker orchestration using Kubernetes
@@ -488,6 +519,10 @@ To delete the deployment you simply run :
 cd kubernetes
 minikube delete
 ```
+
+| Subject                                                         |   Code    | Max. grade| Done |
+|:----------------------------------------------------------------|:---------:|:---------:|:----:|
+| Orchestration with Kubernetes	                                  |   KUB     |    +3     |  ✅  |
 
 ## 7. Making a service mesh using Istio
 
@@ -589,7 +624,12 @@ minikube delete
 
 and it will simply delete the minikube cluster with all the deployment.
 
-## To do
+| Subject                                                         |   Code    | Max. grade| Done |
+|:----------------------------------------------------------------|:---------:|:---------:|:----:|
+| Service mesh using Istio                                        |   IST     |    +2     |  ✅  |
 
-- [x] add the part about Istio in the readme
-- [ ] Do the monitoring part
+## Bonus recap
+
+| Subject                                                         | Done |
+|:----------------------------------------------------------------|:----:|
+| Swagger Integration                                             |  ✅  |

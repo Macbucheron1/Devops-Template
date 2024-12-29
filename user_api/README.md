@@ -146,7 +146,7 @@ curl --header "Content-Type: application/json" \
   http://localhost:3000/health
 ```
 
-It will output:
+It will output (with different uptime and timestamp):
 
 ```json
 { "uptime": 103.347303221, "status": "OK", "timestamp": 1732315440692 }

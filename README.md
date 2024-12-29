@@ -18,7 +18,7 @@
     - e. [Access the User API on Azure](#access-the-user-api-on-azure)
 - [3. Configuring and provisioning a virtual environment and run our application using the IaC approach](#3-configuring-and-provisioning-a-virtual-environment-and-run-our-application-using-the-iac-approach)
   - I. [Prerequisites](#prerequisites)
-  - II. [Alocating the Virtual Machine](#alocating-the-virtual-machine)
+  - II. [Allocating the Virtual Machine](#alocating-the-virtual-machine)
   - III. [Provisioning the Virtual Machine](#provisioning-the-virtual-machine)
   - IV.[Usage](#usage)
   - V. [Demonstration](#demonstration)
@@ -42,7 +42,7 @@
   - VI. [Delete](#5-delete)
 - [7. Making a service mesh using Istio](#7-making-a-service-mesh-using-istio)
   - I. [Deploy the application using istio](#deploy-the-application-using-istio)
-  - II. [Route request and trafic shifting](#route-request-and-trafic-shifting)
+  - II. [Route request and traffic shifting](#route-request-and-trafic-shifting)
   - III. [Demonstration](#istio-demonstration)
 
 ## Description

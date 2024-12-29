@@ -658,3 +658,6 @@ and it will simply delete the minikube cluster with all the deployment.
 | Improved Test Coverage                                          |  ✅  |
 | CI job for automated build and publish to DockerHub             |  ✅  |
 
+
+
+## [Back to the top](#ece-devops-project)

@@ -119,7 +119,7 @@ Here is the result of a successful run:
 
 #### Multiple OS support
 
-One of the Goal of the CI pipeline is to make sure that the code is working on mutiple platform and OS. Therefore, we have added a job to run the CI pipeline on MacOS and Windows. Here is the result of the CI pipeline on MacOS and Windows:
+One of the goals of the CI pipeline is to ensure the code is working on multiple platforms and OS. Therefore, we have added a job to run the CI pipeline on MacOS and Windows. Here is the result of the CI pipeline on MacOS and Windows:
 
 ![CI_UserApi_Windows](./images/CI_CD/FailedWindowsCI.png)
 
@@ -127,7 +127,7 @@ The job failed on Windows because we are using Redis. Redis is not available on 
 
 We have to remove the Windows job to have a successful run on all OS. Therefore our final CI pipeline is only running on MacOS and Linux.
 
-Now here is the result of successful jobs on Linux and MacOS:
+Now here is the result of successful jobs on Linux and macOS:
 
 ![UbuntuMacOSResult](./images/CI_CD/UbuntuMacOsCIResult.png)
 
@@ -158,7 +158,7 @@ In the lab correction, zipping the entire repository might have been simpler for
 > [!IMPORTANT]
 > In order to make the api working online, we have use Azure Cache for Redis. To keep our project clean we have separated the code for the [User API using local Redis](./user_api/README.md) from the code for the [User API for Azure](./user_api_Azure/README.md). We also added another workflow, separating the [CI pipeline using Redis Localy](./.github/workflows/CI_User_Api.yaml) from the [CI/CD pipeline for Azure](./.github/workflows/CI_CD_User_Api_Azure.yml) file.
 
-For the CD pipeline, we have decided to use Azure Web App. We have created a Web App and a Service Plan on Azure. We have also created a secret in the Github repository to store the Azure credentials.
+For the CD pipeline, we have decided to use Azure Web App. We have created a Web App and a Service Plan on Azure. We have also created a secret in the GitHub repository to store the Azure credentials.
 
 ![Web App](./images/CI_CD/WebApp.png)
 

@@ -375,13 +375,13 @@ It is quite simple to publish a Docker image on Docker Hub. We just have to foll
 > Make that the tag follow the right typologie
 >
 > ```bash
-> docker tag current_tag macbucheron/user_api:latest
+> docker tag <current_tag> <your_dockerhub_username>/user_api:latest
 > ```
 
 2. Push the image to Docker Hub:
 
    ```bash
-   docker push macbucheron/user_api:latest
+   docker push <your_dockerhub_username>/user_api:latest
    ```
 
 #### Using Github Actions

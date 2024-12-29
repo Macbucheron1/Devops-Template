@@ -83,7 +83,7 @@ The goal of this section is to create an API and to cover it with test.
 Since the project is more about devops tools than the code itself, we have decided to keep this part simple and simply use the API made during [Lab 4](https://github.com/adaltas/ece-devops-2024-fall/blob/main/modules/04.continuous-testing/lab.md)
 
 The API is a simple CRUD API that manage users. It is made with Node.js and Express. We are using Redis as a database.
-We have made some test for the API using [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/).
+We created some tests for the API using [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/).
 
 | Subject                                                         |   Code    | Max. grade| Done |
 |:----------------------------------------------------------------|:---------:|:---------:| ---- |
@@ -95,7 +95,7 @@ We have made some test for the API using [Mocha](https://mochajs.org/) and [Chai
 ## 2. Apply CI/CD pipeline
 
 ### CI
-CI stand for Continuous Integration. It is a practice in software engineering where the code is automatically tested and checked every time a developer pushes code to the repository. The goal is to find and address bugs and errors as soon as possible.
+CI stands for Continuous Integration. It is a practice in software engineering where the code is automatically tested and checked every time a developer pushes code to the repository. The goal is to find and address bugs and errors as soon as possible.
 
 #### The steps
 

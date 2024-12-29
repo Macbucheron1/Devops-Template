@@ -90,6 +90,7 @@ We have made some test for the API using [Mocha](https://mochajs.org/) and [Chai
 | Enriched web application with automated tests                   |   APP     |    +2     |  ✅  |
 | **Bonus**                                                       |           |           |      |
 | Swagger Integration                                             |   BNS     |           |  ✅  |
+| Improved Test Coverage                                          |   BNS     |           |  ✅  |
 
 ## 2. Apply CI/CD pipeline
 
@@ -628,8 +629,24 @@ and it will simply delete the minikube cluster with all the deployment.
 |:----------------------------------------------------------------|:---------:|:---------:|:----:|
 | Service mesh using Istio                                        |   IST     |    +2     |  ✅  |
 
+## Grading Recap
+
+| Subject                                                         |   Code    | Max. grade| Done |
+|:----------------------------------------------------------------|:---------:|:---------:|:----:|
+| Enriched web application with automated tests                   |   APP     |    +2     |  ✅  |
+| Continuous Integration and Continuous Delivery (and Deployment) |   CICD    |    +3     |  ✅  |
+| Infrastructure as code using Ansible                            |   IAC     |    +3     |  ✅  |
+| Containerisation with Docker                                    |   D       |    +2     |  ✅  |
+| Orchestration with Docker Compose                               |   DC      |    +2     |  ✅  |
+| Orchestration with Kubernetes	                                  |   KUB     |    +3     |  ✅  |
+| Service mesh using Istio                                        |   IST     |    +2     |  ✅  |
+| Bonus                                                           |   BNS     |           |  ✅  |
+
 ## Bonus recap
 
 | Subject                                                         | Done |
 |:----------------------------------------------------------------|:----:|
 | Swagger Integration                                             |  ✅  |
+| Improved Test Coverage                                          |  ✅  |
+| CI job for automated build and publish to DockerHub             |  ✅  |
+

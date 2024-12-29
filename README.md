@@ -204,6 +204,8 @@ You can access the User API on Azure **[Right here](https://https://userapi-mac-
 The goal of this part is to create a virtual machine using the IaC approach. We have decided to use [Vagrant](https://www.vagrantup.com/) to create the virtual machine.
 Then we will use [Ansible](https://www.ansible.com/) to provision the virtual machine and run our application.
 
+Other details about IaC can be found in the [Infrastructure as Code folder](./InfrastructureAsCode/README.md)
+
 ### Alocating the Virtual Machine
 
 We have created a [Vagrantfile](./InfrastructureAsCode/Vagrantfile) in the [InfrastructureAsCode](./InfrastructureAsCode/) directory. This file will create a virtual machine with the following specification:
@@ -244,7 +246,7 @@ npm start
 To use the virtual machine, you have to run the following command:
 
 > [!Important]
-> You will need to have [Vagrant](https://developer.hashicorp.com/vagrant/install) and [Virtual box](https://www.virtualbox.org/wiki/Downloads)installed on your machine to do this part.
+> You will need to have [Vagrant](https://developer.hashicorp.com/vagrant/install) and [Virtual box](https://www.virtualbox.org/wiki/Downloads) installed on your machine to do this part.
 
 1. Move to the [InfrastructureAsCode](./InfrastructureAsCode/) directory:
 

@@ -240,7 +240,7 @@ This playbook run the following roles/tasks:
   - Install npm
   - Install Redis
   - Install Node packages
-- [Tests](./InfrastructureAsCode/playbooks/roles/tests/tasks/main.yml)
+- [Tests](./InfrastructureAsCode/playbooks/roles/test/tasks/main.yml)
   - Check Redis is running
   - Run the User API Tests
   - Run lint tests
@@ -483,7 +483,7 @@ In this part we will use Kubernetes to orchestrate our containers. We will use t
 
 To deploy our API on Kubernetes, we have created two deployment files:
 
-#### [user-api deployment.yaml](./kubernetes/user_api_deployment.yaml)
+#### [user-api deployment.yaml](./kubernetes/user-api/deployment.yaml)
 
    - Defines a Kubernetes Deployment for the `user-api` application.
    - Specifies that one replica of the pod should be running.
@@ -491,7 +491,7 @@ To deploy our API on Kubernetes, we have created two deployment files:
    - The main container runs the `user-api` application and exposes port 3000.
    - Includes liveness and readiness probes to monitor the health of the application.
 
-#### [redis deployment.yaml](./kubernetes/redis_deployment.yaml)
+#### [redis deployment.yaml](./kubernetes/redis/deployment.yaml)
 
 - Defines a Deployment for Redis.
 - Specifies 1 replica of the Redis pod.
@@ -503,9 +503,9 @@ To deploy our API on Kubernetes, we have created two deployment files:
 
 ### Exposing the service
 
-To expose the User API, we have created a [service](https://kubernetes.io/docs/concepts/services-networking/service/) in the [user-api service.yaml](./kubernetes/user_api_service.yaml) file. This service will expose the User API on the port 3000. We used a [LoadBalancer](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service to expose the User API to the outside world.
+To expose the User API, we have created a [service](https://kubernetes.io/docs/concepts/services-networking/service/) in the [user-api service.yaml](./kubernetes/user-api/service.yaml) file. This service will expose the User API on the port 3000. We used a [LoadBalancer](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service to expose the User API to the outside world.
 
-For the Redis server, we have created a [service](https://kubernetes.io/docs/concepts/services-networking/service/) in the [redis service.yaml](./kubernetes/redis_service.yaml) file. This service will expose the Redis server on the port 6379.
+For the Redis server, we have created a [service](https://kubernetes.io/docs/concepts/services-networking/service/) in the [redis service.yaml](./kubernetes/redis/service.yaml) file. This service will expose the Redis server on the port 6379.
 
 ### Use persistent storage
 
@@ -545,7 +545,7 @@ minikube delete
 
 ### Deploy the application using istio
 
-To deploy the application using Istio, we have created a [istio](./istio/) directory. This directory contains the Istioctl commands to deploy the application.
+To deploy the application using Istio, we have created a [istio](./kubernetes/istio/bin) directory. This directory contains the Istioctl commands to deploy the application.
 To use it we have to add Istioctl to the path. You can do it by running the following command:
 
 ```bash

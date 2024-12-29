@@ -425,7 +425,7 @@ The final result can be seen in the [docker-compose.yml](./docker-compose.yml) f
 To run the docker compose file, you just have to run the following command:
 
 ```bash
-docker comopse up
+docker-compose up
 ```
 
 Here is the result of the command:
@@ -455,7 +455,15 @@ curl --header "Content-Type: application/json" \
   http://localhost:3000/user
 ```
 
-then stop the docker compose and start it again. The user should still be there.
+Then stop the docker compose and start it again. 
+And try to get the user with the following command:
+
+```bash
+curl --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:3000/user/macbucheron
+```
+The user should still be there.
 
 | Subject                                                         |   Code    | Max. grade| Done |
 |:----------------------------------------------------------------|:---------:|:---------:|:----:|

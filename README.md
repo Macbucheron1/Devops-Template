@@ -179,7 +179,7 @@ Since we are deploying the User API on Azure, we have to adapt the code to use t
 
 #### The pipeline
 
-Finally, we have added to the CI pipeline a CD job. This job is triggered when the CI pipeline is successful. It will deploy the User API on Azure. You can see the result of the deployments in the [Actions tab](https://github.com/Macbucheron1/devops_project/actions) of the repository
+Finally, we have added to the CI pipeline a CD job. This job is triggered when the CI pipeline is successful. It will deploy the User API on Azure. You can see the result of the deployments in the [Actions tab](https://github.com/Macbucheron1/Devops-Template/actions) of the repository
 
 Finally, after all the test and the deployment, we have a successful pipeline:
 
@@ -391,7 +391,7 @@ It is quite simple to publish a Docker image on Docker Hub. We just have to foll
 
 We can automate the process of building and publishing the Docker image using Github Actions. We created a new [workflow](.github/workflows/CI_DockerHub_Publisher_User_Api.yml). In this worklow we use a CI pipeline and then we push to the docker hub.
 
-Here is what the [github worklow](https://github.com/Macbucheron1/devops_project/actions/workflows/CI_DockerHub_Publisher_User_Api.yml) looks like
+Here is what the [github worklow](https://github.com/Macbucheron1/Devops-Template/actions/workflows/CI_DockerHub_Publisher_User_Api.yml) looks like
 
 ![Git worflow](./images/docker/actualWorkflow.png)
 

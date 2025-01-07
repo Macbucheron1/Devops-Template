@@ -29,7 +29,7 @@ Follow those step to install the project localy:
 2. Access the project file :
 
    ```bash
-   cd devops_project/user_api
+   cd Devops-Template/user_api
    ```
 
 3. Install dependencies :

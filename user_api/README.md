@@ -25,17 +25,17 @@ Follow those step to install the project localy:
 
    HTTP:
     ```bash
-    git clone https://github.com/Macbucheron1/devops_project.git
+    git clone https://github.com/Macbucheron1/Devops-Template
     ```
     SSH:
     ```bash
-    git clone git@github.com:Macbucheron1/devops_project.git
+    git clone git@github.com:Macbucheron1/Devops-Template.git
     ```
 
 2. Access the project file :
 
    ```bash
-   cd devops_project/user_api
+   cd Devops-Template/user_api
    ```
 
 3. Install dependencies :

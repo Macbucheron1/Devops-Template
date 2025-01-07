@@ -1,5 +1,7 @@
 # ECE Devops Project
 
+![devops](./images/else/devops.gif)
+
 Simple API deployement with complete DevOps Methodology
 
 ## Table of content

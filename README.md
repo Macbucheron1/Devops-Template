@@ -47,7 +47,10 @@
 
 ## Description
 
-This is the repository for the Devops project at ECE Paris
+This is the repository for the Devops project we did at ECE Paris.
+
+The Goal was to make a simple API et to deploy it using DevOps method.
+For each part you will find detail step in this readme
 
 Made by:
 
@@ -63,13 +66,13 @@ Follow this step to install the project localy:
    HTTP:
 
    ```bash
-   git clone https://github.com/Macbucheron1/devops_project.git
+   git clone https://github.com/Macbucheron1/Devops-Template
    ```
 
    SSH:
 
    ```bash
-   git clone git@github.com:Macbucheron1/devops_project.git
+   git clone git@github.com:Macbucheron1/Devops-Template.git
    ```
 
 You are now ready to use the project.

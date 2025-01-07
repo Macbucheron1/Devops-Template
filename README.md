@@ -1,5 +1,7 @@
 # ECE Devops Project
 
+Simple API deployement with complete DevOps Methodology
+
 ## Table of content
 
 - [Description](#description)
@@ -49,7 +51,7 @@
 
 This is the repository for the Devops project we did at ECE Paris.
 
-The Goal was to make a simple API et to deploy it using DevOps method.
+The Goal was to make a simple API and to deploy it using DevOps method.
 For each part you will find detail step in this readme
 
 Made by:

@@ -1,4 +1,4 @@
-# ECE Devops Project
+# Devops-Template
 
 ![devops](./images/else/devops.gif)
 
